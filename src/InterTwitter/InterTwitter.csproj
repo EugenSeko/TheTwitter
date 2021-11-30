@@ -53,13 +53,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="Views\Flyout\FlyoutPage.xaml">
+    <EmbeddedResource Update="Views\Flyout\FlyoutView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\Flyout\FlyoutPageDetail.xaml">
+    <EmbeddedResource Update="Views\Flyout\FlyoutViewDetail.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\Flyout\FlyoutPageFlyout.xaml">
+    <EmbeddedResource Update="Views\Flyout\FlyoutViewFlyout.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\Navigation\BookmarksView.xaml">

@@ -11,9 +11,9 @@ using Xamarin.Forms.Xaml;
 namespace InterTwitter.Views.Flyout
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class FlyoutPageDetail : CustomTabbedPage
+    public partial class FlyoutViewDetail : CustomTabbedPage
     {
-        public FlyoutPageDetail()
+        public FlyoutViewDetail()
         {
             InitializeComponent();
         }

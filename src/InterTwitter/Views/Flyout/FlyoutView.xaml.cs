@@ -10,9 +10,9 @@ using Xamarin.Forms.Xaml;
 namespace InterTwitter.Views.Flyout
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class FlyoutPage : FlyoutPage
+    public partial class FlyoutView : FlyoutPage
     {
-        public FlyoutPage()
+        public FlyoutView()
         {
             InitializeComponent();
             FlyoutPage.ListView.ItemSelected += ListView_ItemSelected;
@@ -20,7 +20,7 @@ namespace InterTwitter.Views.Flyout
 
         private void ListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
-            var item = e.SelectedItem as FlyoutPageFlyoutMenuItem;
+            var item = e.SelectedItem as FlyoutViewFlyoutMenuItem;
             if (item == null)
             {
                 return;
@@ -29,8 +29,9 @@ namespace InterTwitter.Views.Flyout
             var page = (Page)Activator.CreateInstance(item.TargetType);
             page.Title = item.Title;
 
-           // Detail = new NavigationPage(page);
-           // IsPresented = false;
+            Detail = new NavigationPage(page);
+            IsPresented = false;
+
             FlyoutPage.ListView.SelectedItem = null;
         }
     }

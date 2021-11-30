@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace InterTwitter.Views.Flyout
 {
-    public class FlyoutPageFlyoutMenuItem
+    public class FlyoutViewFlyoutMenuItem
     {
-        public FlyoutPageFlyoutMenuItem()
+        public FlyoutViewFlyoutMenuItem()
         {
-            TargetType = typeof(FlyoutPageFlyoutMenuItem);
+            TargetType = typeof(FlyoutViewFlyoutMenuItem);
         }
 
         public int Id { get; set; }

@@ -10,7 +10,7 @@ namespace InterTwitter.ViewModels.Flyout
     {
         public MenuItemViewModel()
         {
-            TargetType = typeof(FlyoutPageFlyoutMenuItem);
+            TargetType = typeof(FlyoutViewFlyoutMenuItem);
         }
 
         public int Id { get; set; }

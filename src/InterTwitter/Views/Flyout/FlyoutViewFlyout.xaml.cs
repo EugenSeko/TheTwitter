@@ -13,31 +13,31 @@ using Xamarin.Forms.Xaml;
 namespace InterTwitter.Views.Flyout
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class FlyoutPageFlyout : ContentPage
+    public partial class FlyoutViewFlyout : ContentPage
     {
         public ListView ListView;
 
-        public FlyoutPageFlyout()
+        public FlyoutViewFlyout()
         {
             InitializeComponent();
 
-            BindingContext = new FlyoutPageFlyoutViewModel();
+            BindingContext = new FlyoutViewFlyoutViewModel();
             ListView = MenuItemsListView;
         }
 
-        private class FlyoutPageFlyoutViewModel : INotifyPropertyChanged
+        private class FlyoutViewFlyoutViewModel : INotifyPropertyChanged
         {
-            public ObservableCollection<FlyoutPageFlyoutMenuItem> MenuItems { get; set; }
+            public ObservableCollection<FlyoutViewFlyoutMenuItem> MenuItems { get; set; }
 
-            public FlyoutPageFlyoutViewModel()
+            public FlyoutViewFlyoutViewModel()
             {
-                MenuItems = new ObservableCollection<FlyoutPageFlyoutMenuItem>(new[]
+                MenuItems = new ObservableCollection<FlyoutViewFlyoutMenuItem>(new[]
                 {
-                    new FlyoutPageFlyoutMenuItem { Id = 0, Title = "Page 1" },
-                    new FlyoutPageFlyoutMenuItem { Id = 1, Title = "Page 2" },
-                    new FlyoutPageFlyoutMenuItem { Id = 2, Title = "Page 3" },
-                    new FlyoutPageFlyoutMenuItem { Id = 3, Title = "Page 4" },
-                    new FlyoutPageFlyoutMenuItem { Id = 4, Title = "Page 5" },
+                    new FlyoutViewFlyoutMenuItem { Id = 0, Title = "Page 1" },
+                    new FlyoutViewFlyoutMenuItem { Id = 1, Title = "Page 2" },
+                    new FlyoutViewFlyoutMenuItem { Id = 2, Title = "Page 3" },
+                    new FlyoutViewFlyoutMenuItem { Id = 3, Title = "Page 4" },
+                    new FlyoutViewFlyoutMenuItem { Id = 4, Title = "Page 5" },
                 });
             }
 
