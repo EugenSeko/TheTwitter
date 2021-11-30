@@ -1,5 +1,4 @@
-﻿using InterTwitter.Controls;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,12 +7,12 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace InterTwitter.Views.Flyout
+namespace InterTwitter.Views.Navigation
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class FlyoutPageDetail : CustomTabbedPage
+    public partial class SearchView : BaseContentPage
     {
-        public FlyoutPageDetail()
+        public SearchView()
         {
             InitializeComponent();
         }
