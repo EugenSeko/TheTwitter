@@ -50,7 +50,6 @@
     <Folder Include="Enums\" />
     <Folder Include="Resources\Fonts\" />
     <Folder Include="Services\" />
-    <Folder Include="ViewModels\" />
   </ItemGroup>
 
   <ItemGroup>
