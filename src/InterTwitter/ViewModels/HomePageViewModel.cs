@@ -4,8 +4,6 @@ using InterTwitter.Helpers;
 using InterTwitter.Models;
 using InterTwitter.Models.TweetViewModel;
 using InterTwitter.Services;
-using InterTwitter.Services.Settings;
-using InterTwitter.Services.UserService;
 using InterTwitter.Views;
 using Prism.Navigation;
 using System.Collections.Generic;
@@ -19,7 +17,7 @@ namespace InterTwitter.ViewModels
 {
     public class HomePageViewModel : BaseTabViewModel
     {
-        private readonly IAuthorizationService _authorizationService;
+        private readonly ISettingsManager _settingsManager;
         private readonly ITweetService _tweetService;
         private readonly IBookmarkService _bookmarkService;
         private readonly ILikeService _likeService;
@@ -31,7 +29,7 @@ namespace InterTwitter.ViewModels
 
         public HomePageViewModel(
             INavigationService navigationService,
-            IAuthorizationService authorizationService,
+            ISettingsManager settingsManager,
             IBookmarkService bookmarkService,
             ILikeService likeService,
             ITweetService tweetService,
@@ -39,7 +37,7 @@ namespace InterTwitter.ViewModels
             IRegistrationService registrationService)
             : base(navigationService)
         {
-            _authorizationService = authorizationService;
+            _settingsManager = settingsManager;
             _bookmarkService = bookmarkService;
             _likeService = likeService;
             _tweetService = tweetService;
@@ -50,7 +48,6 @@ namespace InterTwitter.ViewModels
         }
 
         #region -- Public properties --
-
         private ObservableCollection<BaseTweetViewModel> _tweets;
         public ObservableCollection<BaseTweetViewModel> Tweets
         {
@@ -68,14 +65,10 @@ namespace InterTwitter.ViewModels
 
         #region -- Overrides --
 
-        public override Task InitializeAsync(INavigationParameters parameters)
-        {
-            return InitAsync();
-        }
-
-        public override void OnAppearing()
+        public override async void OnAppearing()
         {
             IconPath = App.Current.Resources["ic_home_blue"] as ImageSource;
+            await InitAsync();
         }
 
         public override void OnDisappearing()
@@ -89,22 +82,32 @@ namespace InterTwitter.ViewModels
         }
 
         #endregion
-
         #region -- Private helpers --
-
         private async Task InitAsync()
         {
-            _userId = _authorizationService.UserId;
+            _userId = _settingsManager.UserId;
             var result = await _registrationService.GetByIdAsync(_userId);
 
             if (result.IsSuccess)
             {
                 _currentUser = result.Result;
                 var getTweetResult = await _tweetService.GetAllTweetsAsync();
+                var blocked = _userService.GetAllBlockedUsersAsync().Result;
 
                 if (getTweetResult.IsSuccess)
                 {
-                    var tweetViewModels = new List<BaseTweetViewModel>(getTweetResult.Result.Select(x => x.Media == EAttachedMediaType.Photos || x.Media == EAttachedMediaType.Gif ? x.ToImagesTweetViewModel() : x.ToBaseTweetViewModel()));
+                    List<BaseTweetViewModel> tweetViewModels;
+                    if (blocked.Result != null)
+                    {
+                         tweetViewModels = new List<BaseTweetViewModel>(getTweetResult.Result
+                        .Select(x => x.Media == EAttachedMediaType.Photos || x.Media == EAttachedMediaType.Gif ? x.ToImagesTweetViewModel() : x.ToBaseTweetViewModel())
+                        .Where(t => blocked.Result.All(u => u.Id != t.UserId)));
+                    }
+                    else
+                    {
+                        tweetViewModels = new List<BaseTweetViewModel>(getTweetResult.Result
+                       .Select(x => x.Media == EAttachedMediaType.Photos || x.Media == EAttachedMediaType.Gif ? x.ToImagesTweetViewModel() : x.ToBaseTweetViewModel()));
+                    }
 
                     foreach (var tweet in tweetViewModels)
                     {
@@ -139,14 +142,14 @@ namespace InterTwitter.ViewModels
                                 { { Constants.Navigation.USER, user.Result } }));
                             }
                         }
-
-                        Tweets = new ObservableCollection<BaseTweetViewModel>(tweetViewModels);
-
-                        MessagingCenter.Subscribe<MessageEvent>(this, MessageEvent.AddBookmark, (me) => AddBookmarkAsync(me));
-                        MessagingCenter.Subscribe<MessageEvent>(this, MessageEvent.DeleteBookmark, (me) => DeleteBookmarkAsync(me));
-                        MessagingCenter.Subscribe<MessageEvent>(this, MessageEvent.AddLike, (me) => AddLikeAsync(me));
-                        MessagingCenter.Subscribe<MessageEvent>(this, MessageEvent.DeleteLike, (me) => DeleteLikeAsync(me));
                     }
+
+                    Tweets = new ObservableCollection<BaseTweetViewModel>(tweetViewModels);
+
+                    MessagingCenter.Subscribe<MessageEvent>(this, MessageEvent.AddBookmark, (me) => AddBookmarkAsync(me));
+                    MessagingCenter.Subscribe<MessageEvent>(this, MessageEvent.DeleteBookmark, (me) => DeleteBookmarkAsync(me));
+                    MessagingCenter.Subscribe<MessageEvent>(this, MessageEvent.AddLike, (me) => AddLikeAsync(me));
+                    MessagingCenter.Subscribe<MessageEvent>(this, MessageEvent.DeleteLike, (me) => DeleteLikeAsync(me));
                 }
             }
         }
@@ -188,7 +191,7 @@ namespace InterTwitter.ViewModels
 
         private Task OnOpenAddTweetPageAsync()
         {
-            return Task.CompletedTask;
+            return NavigationService.NavigateAsync(nameof(CreateTweetPage), useModalNavigation: true);
         }
 
         private Task OnOpenFlyoutCommandAsync()

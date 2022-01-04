@@ -1,5 +1,5 @@
 ﻿using Foundation;
-using InterTwitter.Services.PermissionsService;
+using InterTwitter.Services;
 using System.Threading.Tasks;
 using UIKit;
 using Xamarin.Essentials;

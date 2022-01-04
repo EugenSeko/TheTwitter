@@ -11,7 +11,7 @@ namespace InterTwitter
             public const string OPEN_SIDEBAR = nameof(OPEN_SIDEBAR);
             public const string TAB_CHANGE = nameof(TAB_CHANGE);
             public const string USER_PROFILE_CHANGED = nameof(USER_PROFILE_CHANGED);
-            public const string UPDATE_HASHTAGS = "UpdateHashtags";
+            public const string UPDATE_HASHTAGS = nameof(UPDATE_HASHTAGS);
         }
 
         public static class Values
@@ -51,6 +51,16 @@ namespace InterTwitter
             public const string OK_BUTTON_TEXT = nameof(OK_BUTTON_TEXT);
             public const string CANCEL_BUTTON_TEXT = nameof(CANCEL_BUTTON_TEXT);
             public const string ACCEPT = nameof(ACCEPT);
+        }
+
+        public static class Limits
+        {
+            public const int MAX_COUNT_ATTACHED_GIF = 1;
+            public const int MAX_COUNT_ATTACHED_PHOTOS = 6;
+            public const int MAX_SIZE_ATTACHED_PHOTO = 5 * 1024 * 1024;
+            public const int MAX_SIZE_ATTACHED_VIDEO = 15 * 1024 * 1024;
+            public const int MAX_LENGTH_VIDEO = 180;
+            public const int MAX_LENGTH_TEXT = 250;
         }
     }
 }

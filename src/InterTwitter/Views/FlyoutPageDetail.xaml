@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<controls:CustomTabbedPage x:Class="InterTwitter.Views.FlyoutPageDetail"
+<controls:CustomTabbedPage 
                            xmlns="http://xamarin.com/schemas/2014/forms"
                            xmlns:prism="http://prismlibrary.com"
                            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
@@ -13,7 +13,8 @@
                            prism:ViewModelLocator.AutowireViewModel="True"
                            BarBackgroundColor="{DynamicResource appcolor_i2}" 
                            SelectedTabColor="{DynamicResource appcolor_i1}" 
-                           SelectedTabType="{Binding SelectedTabType}">
+                           SelectedTabType="{Binding SelectedTabType}"
+                           x:Class="InterTwitter.Views.FlyoutPageDetail">
     
     <TabbedPage.Behaviors>
         <behaviors:TabbedPageNavigationBehavior/>

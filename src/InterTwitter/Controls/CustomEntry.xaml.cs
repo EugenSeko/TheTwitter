@@ -277,7 +277,7 @@ namespace InterTwitter.Controls
           propertyName: nameof(IsButtonClearEnable),
           returnType: typeof(bool),
           declaringType: typeof(CustomEntry),
-          defaultValue: false,
+          defaultValue: true,
           defaultBindingMode: BindingMode.TwoWay);
 
         public bool IsButtonClearEnable
@@ -398,18 +398,18 @@ namespace InterTwitter.Controls
             return Task.CompletedTask;
         }
 
-        private Task OnFocusedCommandAsync()
+        private async Task OnFocusedCommandAsync()
         {
             if (!IsPassword)
             {
                 IsButtonEyeVisible = true;
             }
 
-            IsFocusedVisible = true;
             IsFocusedButton = true;
             CustomEntryLocal.Placeholder = string.Empty;
 
-            return Task.CompletedTask;
+            await Task.Delay(300);
+            IsFocusedVisible = true;
         }
 
         private Task OnUnfocusedCommandAsync()

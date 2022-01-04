@@ -74,6 +74,7 @@
                                       Placeholder="{xct:Translate Email}"
                                       ClearImageSource="{DynamicResource ic_clear_gray}"
                                       FontFamily="Ubuntu-Regular"
+                                      IsButtonClearEnable="True"
                                       PlaceholderColor="{DynamicResource appcolor_i4}"
                                       TextColor="{DynamicResource appcolor_i3}" />
 
@@ -104,6 +105,7 @@
                                       IsFocusedButton="{Binding IsFocusedPassword}"
                                       IsEntryFocused="{Binding IsEntryPasswordFocused}"
                                       IsPassword="True"
+                                      IsButtonClearEnable="True"
                                       Placeholder="{xct:Translate Password}" />
                 
                 <Label Grid.Row="2"

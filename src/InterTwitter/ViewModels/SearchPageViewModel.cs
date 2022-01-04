@@ -4,7 +4,6 @@ using InterTwitter.Helpers;
 using InterTwitter.Models;
 using InterTwitter.Models.TweetViewModel;
 using InterTwitter.Services;
-using InterTwitter.Services.Hashtag;
 using Prism.Navigation;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;

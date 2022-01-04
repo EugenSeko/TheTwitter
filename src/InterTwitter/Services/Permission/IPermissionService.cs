@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Xamarin.Essentials;
 
-namespace InterTwitter.Services.PermissionsService
+namespace InterTwitter.Services
 {
     public interface IPermissionService
     {

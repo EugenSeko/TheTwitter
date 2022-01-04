@@ -1,4 +1,4 @@
-﻿using InterTwitter.Enums;
+using InterTwitter.Enums;
 using InterTwitter.Extensions;
 using InterTwitter.Helpers;
 using InterTwitter.Models;
@@ -19,7 +19,7 @@ namespace InterTwitter.ViewModels
     public class BookmarksPageViewModel : BaseTabViewModel
     {
         private readonly ITweetService _tweetService;
-        private readonly IAuthorizationService _authorizationService;
+        private readonly ISettingsManager _settingsManager;
         private readonly IRegistrationService _registrationService;
         private readonly IBookmarkService _bookmarkService;
         private readonly ILikeService _likeService;
@@ -32,14 +32,14 @@ namespace InterTwitter.ViewModels
             ITweetService tweetService,
             ILikeService likeService,
             IBookmarkService bookmarkService,
-            IAuthorizationService authorizationService,
+            ISettingsManager settingsManager,
             IRegistrationService registrationService)
             : base(navigationService)
         {
             _tweetService = tweetService;
             _likeService = likeService;
             _bookmarkService = bookmarkService;
-            _authorizationService = authorizationService;
+            _settingsManager = settingsManager;
             _registrationService = registrationService;
             IconPath = Prism.PrismApplicationBase.Current.Resources["ic_bookmarks_gray"] as ImageSource;
         }
@@ -129,7 +129,7 @@ namespace InterTwitter.ViewModels
 
         public override async void OnNavigatedTo(INavigationParameters parameters)
         {
-            _userId = _authorizationService.UserId;
+            _userId = _settingsManager.UserId;
             var result = await _registrationService.GetByIdAsync(_userId);
 
             if (result.IsSuccess)

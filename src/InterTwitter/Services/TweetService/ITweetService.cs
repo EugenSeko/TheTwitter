@@ -16,5 +16,7 @@ namespace InterTwitter.Services
         Task<AOResult<List<TweetModel>>> GetByUserTweetsAsync(int userid);
 
         Task<AOResult<IEnumerable<TweetModel>>> FindTweetsByKeywordsAsync(IEnumerable<string> keys);
+
+        Task<AOResult> AddTweetAsync(TweetModel tweet);
     }
 }

@@ -1,9 +1,6 @@
 ﻿using InterTwitter.Enums;
 using InterTwitter.Helpers;
-using InterTwitter.Services.UserService;
-using InterTwitter.Views;
 using Prism.Mvvm;
-using Prism.Navigation;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;

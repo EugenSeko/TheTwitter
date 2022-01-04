@@ -2,22 +2,27 @@
 <local:BaseContentPage x:Class="InterTwitter.Views.ProfilePage"
                        xmlns="http://xamarin.com/schemas/2014/forms"
                        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                       xmlns:behaviors="clr-namespace:InterTwitter.Behaviors"
                        xmlns:cards="clr-namespace:PanCardView;assembly=PanCardView"
                        xmlns:cardsControls="clr-namespace:PanCardView.Controls;assembly=PanCardView"
+                       xmlns:controls="clr-namespace:InterTwitter.Controls"
                        xmlns:ffimage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
                        xmlns:fftranform="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
                        xmlns:local="clr-namespace:InterTwitter.Views"
-                       xmlns:localmodel="clr-namespace:InterTwitter.ViewModels"
-                       xmlns:controls="clr-namespace:InterTwitter.Controls"
                        xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
                        BackgroundColor="{DynamicResource appcolor_i2}">
 
-    <Grid RowDefinitions="0.278*, 0.198*, 0.524*" 
+    <ContentPage.Behaviors>
+        <behaviors:TabPageBehavior />
+    </ContentPage.Behaviors>
+
+
+    <Grid RowDefinitions="0.278*, 0.250*, 0.472*" 
           RowSpacing="0">
 
         <Image Grid.Row="0"
                Aspect="AspectFill"
-               Source="https://picsum.photos/500/500?image=122" />
+               Source="{Binding UserBackgroundImage}" />
 
         <cardsControls:CircleFrame Grid.Row="0"
                                    Margin="16,16,0,0"
@@ -27,7 +32,7 @@
                                    VerticalOptions="Start"
                                    WidthRequest="32">
             <Image Scale="0.8" 
-                   Source="ic_left_white" />
+                   Source="{DynamicResource ic_left_white}" />
             <cardsControls:CircleFrame.GestureRecognizers>
                 <TapGestureRecognizer Command="{Binding NavgationCommandAsync}" />
             </cardsControls:CircleFrame.GestureRecognizers>
@@ -40,16 +45,12 @@
                                    HorizontalOptions="End"
                                    VerticalOptions="Start"
                                    WidthRequest="32">
-            <Image Scale="0.8" 
+            <Image Scale="0.8"
                    Source="{DynamicResource ic_hidden_menu_white_small}" />
-
             <cardsControls:CircleFrame.GestureRecognizers>
-            
                 <TapGestureRecognizer Command="{Binding HamburgerMenuCommandAsync}" 
                                       Tapped="OnMenuTappedHandler" />
-            
             </cardsControls:CircleFrame.GestureRecognizers>
-
         </cardsControls:CircleFrame>
 
         <!--  Hidden menu  -->
@@ -63,100 +64,75 @@
                HorizontalOptions="End"
                IsVisible="{Binding IsCurrentUserMenuVisible, Mode=TwoWay}"
                VerticalOptions="Start">
-
             <StackLayout x:Name="currentUserMenuStack">
-
                 <Label Style="{DynamicResource tstyle_i9}"
                        Text="{xct:Translate Share}"
                        TextColor="{DynamicResource appcolor_i3}">
-
                     <Label.GestureRecognizers>
-
                         <TapGestureRecognizer Command="{Binding ShareCommandAsync}" 
                                               Tapped="OnAnywhereTappedHandler" />
-                    
                     </Label.GestureRecognizers>
                 </Label>
-
                 <Label Style="{DynamicResource tstyle_i9}"
                        Text="{xct:Translate ChangeProfile}"
                        TextColor="{DynamicResource appcolor_i3}">
-
                     <Label.GestureRecognizers>
-                    
                         <TapGestureRecognizer Command="{Binding NavigationToEditCommandAsync}" 
                                               Tapped="OnAnywhereTappedHandler" />
-                    
                     </Label.GestureRecognizers>
-
                 </Label>
-
                 <Label Style="{DynamicResource tstyle_i9}"
                        Text="{xct:Translate MutedProfiles}"
                        TextColor="{DynamicResource appcolor_i3}">
-
                     <Label.GestureRecognizers>
-
-                        <TapGestureRecognizer Command="{Binding NavigationToMutelistCommandAsync}" 
+                        <TapGestureRecognizer Command="{Binding NavigationToMutelistCommandAsync}"
                                               Tapped="OnAnywhereTappedHandler" />
-                    
                     </Label.GestureRecognizers>
-
                 </Label>
-
                 <Label Style="{DynamicResource tstyle_i9}"
                        Text="{xct:Translate Blacklist}"
                        TextColor="{DynamicResource appcolor_i3}">
-
                     <Label.GestureRecognizers>
-
                         <TapGestureRecognizer Command="{Binding NavigationToBlacklistCommandAsync}" 
                                               Tapped="OnAnywhereTappedHandler" />
-                    
                     </Label.GestureRecognizers>
-                    
                 </Label>
-
             </StackLayout>
-
         </Frame>
 
-        <!-- !!!!!!!!!FIX LAYOUT AS ABOVE!!!!!!!!!!-->
-
-        <Frame
-            x:Name="userHiddenMenu"
-            Grid.Row="0"
-            Grid.RowSpan="2"
-            Margin="0,16,6,0"
-            Padding="16,21,64,21"
-            CornerRadius="6"
-            HasShadow="True"
-            HorizontalOptions="End"
-            IsVisible="{Binding IsUserMenuVisible, Mode=TwoWay}"
-            VerticalOptions="Start">
+        <Frame x:Name="userHiddenMenu"
+               Grid.Row="0"
+               Grid.RowSpan="2"
+               Margin="0,16,6,0"
+               Padding="16,21,64,21"
+               CornerRadius="6"
+               HasShadow="True"
+               HorizontalOptions="End"
+               IsVisible="{Binding IsUserMenuVisible, Mode=TwoWay}"
+               VerticalOptions="Start">
             <StackLayout x:Name="menuStack">
-                <Label
-                    Style="{DynamicResource tstyle_i9}"
-                    Text="{xct:Translate Share}"
-                    TextColor="{DynamicResource appcolor_i3}">
+                <Label Style="{DynamicResource tstyle_i9}"
+                       Text="{xct:Translate Share}"
+                       TextColor="{DynamicResource appcolor_i3}">
                     <Label.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding ShareCommandAsync}" Tapped="OnAnywhereTappedHandler" />
+                        <TapGestureRecognizer Command="{Binding ShareCommandAsync}"
+                                              Tapped="OnAnywhereTappedHandler" />
                     </Label.GestureRecognizers>
                 </Label>
-                <Label
-                    Style="{DynamicResource tstyle_i9}"
-                    Text="{xct:Translate Mute}"
-                    TextColor="{DynamicResource appcolor_i3}">
+                <Label Style="{DynamicResource tstyle_i9}"
+                       Text="{xct:Translate Mute}"
+                       TextColor="{DynamicResource appcolor_i3}">
                     <Label.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding AddUserToMuteListCommandAsync}" Tapped="OnAnywhereTappedHandler" />
+                        <TapGestureRecognizer Command="{Binding AddUserToMuteListCommandAsync}"
+                                              Tapped="OnAnywhereTappedHandler" />
                     </Label.GestureRecognizers>
                 </Label>
-                <Label
-                    Style="{DynamicResource tstyle_i9}"
-                    Text="{xct:Translate AddToBlacklist}"
-                    TextColor="{DynamicResource appcolor_i3}">
+                <Label Style="{DynamicResource tstyle_i9}"
+                       Text="{xct:Translate AddToBlacklist}"
+                       TextColor="{DynamicResource appcolor_i3}">
                     <Label.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding AddUserToBlacklistCommandAsync}" Tapped="OnAnywhereTappedHandler" />
+                        <TapGestureRecognizer Command="{Binding AddUserToBlacklistCommandAsync}" 
+                                              Tapped="OnAnywhereTappedHandler" />
                     </Label.GestureRecognizers>
                 </Label>
             </StackLayout>
@@ -164,36 +140,35 @@
         <!--  Hidden menu  -->
 
         <!--  MIDDLE SPACE  -->
-        <Grid
-            Grid.Row="1"
-            BackgroundColor="Transparent"
-            ColumnDefinitions="0.4*, 0.6*">
-            <StackLayout
-                Grid.Column="0"
-                Grid.ColumnSpan="2"
-                Margin="16,0,0,0"
-                HorizontalOptions="Start"
-                VerticalOptions="Center">
-                <Label Style="{DynamicResource tstyle_i14}" Text="{Binding UserName}" />
-                <Label Style="{DynamicResource tstyle_i9}" Text="{Binding UserMail}" />
+        <Grid Grid.Row="1"
+              BackgroundColor="Transparent"
+              ColumnDefinitions="0.4*, 0.6*">
+            <StackLayout Grid.Column="0"
+                         Grid.ColumnSpan="2"
+                         Margin="16,0,0,0"
+                         HorizontalOptions="Start"
+                         VerticalOptions="Center">
+                <Label Style="{DynamicResource tstyle_i14}" 
+                       Text="{Binding UserName}" />
+                <Label Style="{DynamicResource tstyle_i9}" 
+                       Text="{Binding UserMail}" />
             </StackLayout>
 
-            <Frame
-                x:Name="changeProfFrame"
-                Grid.Column="1"
-                Margin="0,8,16,0"
-                Padding="28,6,28,6"
-                BorderColor="{DynamicResource appcolor_i4}"
-                HasShadow="False"
-                HorizontalOptions="End"
-                IsVisible="{Binding IsChangeProfileButtonVisible}"
-                VerticalOptions="Start">
-                <Label
-                    x:Name="changeProfLabel"
-                    Style="{DynamicResource tstyle_i8}"
-                    Text="{xct:Translate ChangeProfile}" />
+            <Frame x:Name="changeProfFrame"
+                   Grid.Column="1"
+                   Margin="0,8,16,0"
+                   Padding="28,6,28,6"
+                   BorderColor="{DynamicResource appcolor_i4}"
+                   HasShadow="False"
+                   HorizontalOptions="End"
+                   IsVisible="{Binding IsChangeProfileButtonVisible}"
+                   VerticalOptions="Start">
+                <Label x:Name="changeProfLabel"
+                       Style="{DynamicResource tstyle_i8}"
+                       Text="{xct:Translate ChangeProfile}" />
                 <Frame.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding NavigationToEditCommandAsync}" Tapped="OnChangeProfTapHandler" />
+                    <TapGestureRecognizer Command="{Binding NavigationToEditCommandAsync}" 
+                                          Tapped="OnChangeProfTapHandler" />
                 </Frame.GestureRecognizers>
                 <Frame.CornerRadius>
                     <OnPlatform x:TypeArguments="x:Single">
@@ -203,21 +178,19 @@
                 </Frame.CornerRadius>
             </Frame>
 
-            <Frame
-                x:Name="blacklistFrame"
-                Grid.Column="1"
-                Margin="0,8,16,0"
-                Padding="28,6,28,6"
-                BorderColor="{DynamicResource appcolor_i7}"
-                HasShadow="False"
-                HorizontalOptions="End"
-                IsVisible="{Binding IsBlacklistButtonVisible}"
-                VerticalOptions="Start">
-                <Label
-                    x:Name="blacklistLabel"
-                    Style="{DynamicResource tstyle_i8}"
-                    Text="{xct:Translate ProfileInBlacklist}"
-                    TextColor="{DynamicResource appcolor_i7}" />
+            <Frame x:Name="blacklistFrame"
+                   Grid.Column="1"
+                   Margin="0,8,16,0"
+                   Padding="28,6,28,6"
+                   BorderColor="{DynamicResource appcolor_i7}"
+                   HasShadow="False"
+                   HorizontalOptions="End"
+                   IsVisible="{Binding IsBlacklistButtonVisible}"
+                   VerticalOptions="Start">
+                <Label x:Name="blacklistLabel"
+                       Style="{DynamicResource tstyle_i8}"
+                       Text="{xct:Translate ProfileInBlacklist}"
+                       TextColor="{DynamicResource appcolor_i7}" />
                 <Frame.GestureRecognizers>
                     <TapGestureRecognizer Command="{Binding RemoveUserFromBlacklistCommandAsync}" />
                 </Frame.GestureRecognizers>
@@ -229,21 +202,19 @@
                 </Frame.CornerRadius>
             </Frame>
 
-            <Frame
-                x:Name="muteFrame"
-                Grid.Column="1"
-                Margin="0,8,16,0"
-                Padding="28,6,28,6"
-                BorderColor="{DynamicResource appcolor_i4}"
-                CornerRadius="45"
-                HasShadow="False"
-                HorizontalOptions="End"
-                IsVisible="{Binding IsMuteButtonVisible}"
-                VerticalOptions="Start">
-                <Label
-                    x:Name="muteLabel"
-                    Style="{DynamicResource tstyle_i8}"
-                    Text="{xct:Translate Muted}" />
+            <Frame x:Name="muteFrame"
+                   Grid.Column="1"
+                   Margin="0,8,16,0"
+                   Padding="28,6,28,6"
+                   BorderColor="{DynamicResource appcolor_i4}"
+                   CornerRadius="45"
+                   HasShadow="False"
+                   HorizontalOptions="End"
+                   IsVisible="{Binding IsMuteButtonVisible}"
+                   VerticalOptions="Start">
+                <Label x:Name="muteLabel"
+                       Style="{DynamicResource tstyle_i8}"
+                       Text="{xct:Translate Muted}" />
                 <Frame.GestureRecognizers>
                     <TapGestureRecognizer Command="{Binding RemoveUserFromMuteListCommandAsync}" />
                 </Frame.GestureRecognizers>
@@ -258,22 +229,20 @@
 
             <!--  CONTENT Control  -->
             <ContentView>
-                <cardsControls:TabsControl
-                    BindingContext="{x:Reference lists}"
-                    HorizontalOptions="Start"
-                    StripeColor="{DynamicResource appcolor_i1}"
-                    StripeHeight="1.4"
-                    VerticalOptions="End">
+                <cardsControls:TabsControl BindingContext="{x:Reference lists}"
+                                           HorizontalOptions="Start"
+                                           StripeColor="{DynamicResource appcolor_i1}"
+                                           StripeHeight="1.4"
+                                           VerticalOptions="End">
                     <cardsControls:TabsControl.ItemTemplate>
                         <DataTemplate>
-                            <Label
-                                x:Name="itemLabel"
-                                Margin="0,0,0,8"
-                                HorizontalOptions="Start"
-                                Style="{DynamicResource Content_i7}"
-                                TextColor="{Binding TextColor}"
-                                VerticalOptions="CenterAndExpand"
-                                VerticalTextAlignment="Center">
+                            <Label x:Name="itemLabel"
+                                   Margin="0,0,0,8"
+                                   HorizontalOptions="Start"
+                                   Style="{DynamicResource Content_i7}"
+                                   TextColor="{Binding TextColor}"
+                                   VerticalOptions="CenterAndExpand"
+                                   VerticalTextAlignment="Center">
                                 <Label.FormattedText>
                                     <FormattedString>
                                         <Span Text="     " />
@@ -292,20 +261,19 @@
         </Grid>
 
         <!--  User photo  -->
-        <cardsControls:CircleFrame
-            Grid.Row="0"
-            Grid.RowSpan="2"
-            Margin="16,25,0,0"
-            BackgroundColor="{DynamicResource appcolor_i2}"
-            HeightRequest="64"
-            HorizontalOptions="Start"
-            VerticalOptions="Center"
-            WidthRequest="64">
-            <cardsControls:CircleFrame
-                HorizontalOptions="Center"
-                Size="60"
-                VerticalOptions="Center">
-                <ffimage:CachedImage Aspect="AspectFill" Source="{Binding UserImagePath}">
+        <cardsControls:CircleFrame Grid.Row="0"
+                                   Grid.RowSpan="2"
+                                   Margin="16,25,0,0"
+                                   BackgroundColor="{DynamicResource appcolor_i2}"
+                                   HeightRequest="64"
+                                   HorizontalOptions="Start"
+                                   VerticalOptions="Center"
+                                   WidthRequest="64">
+            <cardsControls:CircleFrame HorizontalOptions="Center"
+                                       Size="60"
+                                       VerticalOptions="Center">
+                <ffimage:CachedImage Aspect="AspectFill" 
+                                     Source="{Binding UserImagePath}">
                     <ffimage:CachedImage.Transformations>
                         <fftranform:CircleTransformation />
                     </ffimage:CachedImage.Transformations>
@@ -315,27 +283,23 @@
         <!--  User photo  -->
 
         <!--  CONTENT SPACE  -->
-        <cards:CarouselView
-            x:Name="lists"
-            Grid.Row="2"
-            BackgroundColor="{DynamicResource appcolor_i2}"
-            IsCyclical="False"
-            IsPanInteractionEnabled="False"
-            IsPanSwipeEnabled="False"
-            ItemAppearing="OnItemApearingHandler"
-            ItemsSource="{Binding MenuItems}">
+        <cards:CarouselView x:Name="lists"
+                            Grid.Row="2"
+                            BackgroundColor="{DynamicResource appcolor_i2}"
+                            IsCyclical="False"
+                            IsPanInteractionEnabled="False"
+                            IsPanSwipeEnabled="False"
+                            ItemAppearing="OnItemApearingHandler"
+                            ItemsSource="{Binding MenuItems}">
 
             <cards:CarouselView.ItemTemplate>
                 <DataTemplate>
                     <ContentView>
-                        <RefreshView>
-                            <controls:CustomCollectionView
-                                x:Name="customCollectView"
-                                HorizontalScrollBarVisibility="Never"
-                                ItemTemplate="{DynamicResource templateSelector}"
-                                ItemsSource="{Binding ContentCollection}"
-                                ItemsUpdatingScrollMode="KeepItemsInView" />
-                        </RefreshView>
+                        <controls:CustomCollectionView x:Name="customCollectView"   
+                                                           HorizontalScrollBarVisibility="Never"
+                                                           ItemTemplate="{DynamicResource templateSelector}"
+                                                           ItemsSource="{Binding ContentCollection}"
+                                                           ItemsUpdatingScrollMode="KeepItemsInView" />
                     </ContentView>
                 </DataTemplate>
             </cards:CarouselView.ItemTemplate>

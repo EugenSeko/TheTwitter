@@ -1,12 +1,12 @@
 ﻿using InterTwitter.Helpers;
 using InterTwitter.Models;
-using InterTwitter.Services.Settings;
+using InterTwitter.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace InterTwitter.Services.UserService
+namespace InterTwitter.Services
 {
     public class UserService : IUserService
     {
@@ -23,12 +23,12 @@ namespace InterTwitter.Services.UserService
 
         #region -- IUserService Implementation --
 
-        public Task<AOResult> DeleteUserAsync(UserModel user)
+        public async Task<AOResult> DeleteUserAsync(UserModel user)
         {
             var result = new AOResult();
             try
             {
-                _mockService.Users.Remove(user);
+                await _mockService.RemoveAsync<UserModel>(user);
                 result.SetSuccess();
             }
             catch (Exception ex)
@@ -36,15 +36,15 @@ namespace InterTwitter.Services.UserService
                 result.SetError($"{nameof(DeleteUserAsync)} : exception", "Something went wrong", ex);
             }
 
-            return Task.FromResult(result);
+            return result;
         }
 
-        public Task<AOResult<IEnumerable<UserModel>>> GetAllUsersAsync()
+        public async Task<AOResult<IEnumerable<UserModel>>> GetAllUsersAsync()
         {
             var result = new AOResult<IEnumerable<UserModel>>();
             try
             {
-                var users = _mockService.Users;
+                var users = await _mockService.GetAllAsync<UserModel>();
                 if (users != null)
                 {
                     result.SetSuccess(users);
@@ -59,15 +59,15 @@ namespace InterTwitter.Services.UserService
                 result.SetError($"{nameof(GetAllUsersAsync)} : exception", "Something went wrong", ex);
             }
 
-            return Task.FromResult(result);
+            return result;
         }
 
-        public Task<AOResult<UserModel>> GetUserAsync(int id)
+        public async Task<AOResult<UserModel>> GetUserAsync(int id)
         {
             var result = new AOResult<UserModel>();
             try
             {
-                var user = _mockService.Users?.FirstOrDefault(x => x.Id == id);
+                var user = await _mockService.FindAsync<UserModel>(x => x.Id == id);
                 if (user != null)
                 {
                     result.SetSuccess(user);
@@ -82,21 +82,26 @@ namespace InterTwitter.Services.UserService
                 result.SetError($"{nameof(GetUserAsync)} : exception", "Something went wrong", ex);
             }
 
-            return Task<AOResult<UserModel>>.FromResult(result);
+            return result;
         }
 
-        public Task<AOResult> InsertUserAsync(UserModel user)
+        public async Task<AOResult<int>> InsertUserAsync(UserModel user)
         {
-            var result = new AOResult();
+            var result = new AOResult<int>();
             try
             {
-                var sameUser = _mockService.Users?.FirstOrDefault(x => x.Email == user.Email);
-                if (sameUser == null)
+                if (!await _mockService.AnyAsync<UserModel>(x => x.Email == user.Email))
                 {
-                    var lastId = _mockService.Users.OrderBy(x => x.Id).LastOrDefault()?.Id;
-                    user.Id = (int)++lastId;
-                    _mockService.Users.Add(user);
-                    result.SetSuccess();
+                    var id = await _mockService.AddAsync<UserModel>(user);
+
+                    if (id > 0)
+                    {
+                        result.SetSuccess(id);
+                    }
+                    else
+                    {
+                        result.SetFailure();
+                    }
                 }
                 else
                 {
@@ -108,41 +113,45 @@ namespace InterTwitter.Services.UserService
                 result.SetError($"{nameof(InsertUserAsync)} : exception", "Something went wrong", ex);
             }
 
-            return Task.FromResult(result);
+            return result;
         }
 
-        public Task<AOResult> UpdateUserAsync(UserModel user)
+        public async Task<AOResult> UpdateUserAsync(UserModel user)
         {
             var result = new AOResult();
             try
             {
-                var oldUser = _mockService.Users?.FirstOrDefault(x => x.Id == user.Id);
-                _mockService.Users?.Remove(oldUser);
-                _mockService.Users?.Add(user);
-                _mockService.Users = _mockService.Users.OrderBy(x => x.Id).ToList();
-                result.SetSuccess();
+                user = await _mockService.UpdateAsync<UserModel>(user);
+                if (user != null)
+                {
+                    result.SetSuccess();
+                }
+                else
+                {
+                    result.SetFailure();
+                }
             }
             catch (Exception ex)
             {
                 result.SetError($"{nameof(UpdateUserAsync)} : exception", "Something went wrong", ex);
             }
 
-            return Task.FromResult(result);
+            return result;
         }
 
-        public Task<AOResult> AddToBlacklistAsync(int userId)
+        public async Task<AOResult> AddToBlacklistAsync(int userId)
         {
             var result = new AOResult();
             try
             {
                 var id = 1;
-                if (_mockService.BlackList.Count() > 0)
+                if ((await _mockService.GetAllAsync<BlockModel>()).Count() > 0)
                 {
-                    id = (int)_mockService.BlackList.Max(x => x.Id);
+                    id = (await _mockService.GetAllAsync<BlockModel>()).Max(x => x.Id);
                     id++;
                 }
 
-                _mockService.BlackList.Add(new BlockModel
+                await _mockService.AddAsync<BlockModel>(new BlockModel
                 {
                     UserId = _currentUserId,
                     BlockedUserId = userId,
@@ -155,25 +164,24 @@ namespace InterTwitter.Services.UserService
                 result.SetError($"{nameof(AddToBlacklistAsync)} : exception", "Something went wrong", ex);
             }
 
-            return Task.FromResult(result);
+            return result;
         }
 
-        public Task<AOResult> AddToMuteListAsync(int userId)
+        public async Task<AOResult> AddToMuteListAsync(int userId)
         {
             var result = new AOResult();
             try
             {
                 var id = 1;
-                if (_mockService.MuteList.Count() > 0)
+                if ((await _mockService.GetAllAsync<MuteModel>()).Count() > 0)
                 {
-                    id = (int)_mockService.MuteList.Max(x => x.Id);
+                    id = (await _mockService.GetAllAsync<MuteModel>()).Max(x => x.Id);
                 }
 
-                _mockService.MuteList.Add(new MuteModel
+                await _mockService.AddAsync<MuteModel>(new MuteModel
                 {
                     UserId = _currentUserId,
                     MutedUserId = userId,
-                    Id = id,
                 });
                 result.SetSuccess();
             }
@@ -182,15 +190,15 @@ namespace InterTwitter.Services.UserService
                 result.SetError($"{nameof(AddToMuteListAsync)} : exception", "Something went wrong", ex);
             }
 
-            return Task.FromResult(result);
+            return result;
         }
 
-        public Task<AOResult<bool>> CheckIfUserIsBlockedAsync(int userId)
+        public async Task<AOResult<bool>> CheckIfUserIsBlockedAsync(int userId)
         {
             var result = new AOResult<bool>();
             try
             {
-                if (_mockService.BlackList.Any(x => x.UserId == _currentUserId && x.BlockedUserId == userId))
+                if (await _mockService.AnyAsync<BlockModel>(x => x.UserId == _currentUserId && x.BlockedUserId == userId))
                 {
                     result.SetSuccess(true);
                 }
@@ -204,15 +212,15 @@ namespace InterTwitter.Services.UserService
                 result.SetError($"{nameof(CheckIfUserIsBlockedAsync)} : exception", "Something went wrong", ex);
             }
 
-            return Task.FromResult(result);
+            return result;
         }
 
-        public Task<AOResult<bool>> CheckIfUserIsMutedAsync(int userId)
+        public async Task<AOResult<bool>> CheckIfUserIsMutedAsync(int userId)
         {
             var result = new AOResult<bool>();
             try
             {
-                if (_mockService.MuteList.Any(x => x.UserId == _currentUserId && x.MutedUserId == userId))
+                if (await _mockService.AnyAsync<MuteModel>(x => x.UserId == _currentUserId && x.MutedUserId == userId))
                 {
                     result.SetSuccess(true);
                 }
@@ -226,18 +234,18 @@ namespace InterTwitter.Services.UserService
                 result.SetError($"{nameof(CheckIfUserIsMutedAsync)} : exception", "Something went wrong", ex);
             }
 
-            return Task.FromResult(result);
+            return result;
         }
 
-        public Task<AOResult> RemoveFromBlacklistAsync(int userId)
+        public async Task<AOResult> RemoveFromBlacklistAsync(int userId)
         {
             var result = new AOResult();
             try
             {
-                var userToRemove = _mockService.BlackList.FirstOrDefault(x => x.UserId == _currentUserId && x.BlockedUserId == userId);
+                var userToRemove = await _mockService.FindAsync<BlockModel>(x => x.UserId == _currentUserId && x.BlockedUserId == userId);
                 if (userToRemove != null)
                 {
-                    _mockService.BlackList.Remove(userToRemove);
+                    await _mockService.RemoveAsync<BlockModel>(userToRemove);
                     result.SetSuccess();
                 }
                 else
@@ -250,18 +258,18 @@ namespace InterTwitter.Services.UserService
                 result.SetError($"{nameof(RemoveFromBlacklistAsync)} : exception", "Something went wrong", ex);
             }
 
-            return Task.FromResult(result);
+            return result;
         }
 
-        public Task<AOResult> RemoveFromMutelistAsync(int userId)
+        public async Task<AOResult> RemoveFromMutelistAsync(int userId)
         {
             var result = new AOResult();
             try
             {
-                var userToRemove = _mockService.MuteList.FirstOrDefault(x => x.UserId == _currentUserId && x.MutedUserId == userId);
+                var userToRemove = await _mockService.FindAsync<MuteModel>(x => x.UserId == _currentUserId && x.MutedUserId == userId);
                 if (userToRemove != null)
                 {
-                    _mockService.MuteList.Remove(userToRemove);
+                    await _mockService.RemoveAsync<MuteModel>(userToRemove);
                     result.SetSuccess();
                 }
                 else
@@ -274,17 +282,17 @@ namespace InterTwitter.Services.UserService
                 result.SetError($"{nameof(RemoveFromMutelistAsync)} : exception", "Something went wrong", ex);
             }
 
-            return Task.FromResult(result);
+            return result;
         }
 
-        public Task<AOResult<IEnumerable<UserModel>>> GetAllMutedUsersAsync()
+        public async Task<AOResult<IEnumerable<UserModel>>> GetAllMutedUsersAsync()
         {
             var result = new AOResult<IEnumerable<UserModel>>();
             try
             {
-                var muteList = _mockService.MuteList.Where(x => x.UserId == _currentUserId);
+                var muteList = await _mockService.GetAsync<MuteModel>(x => x.UserId == _currentUserId);
 
-                var resultList = _mockService.Users.Where(x => muteList.Any(u => u.MutedUserId == x.Id));
+                var resultList = await _mockService.GetAsync<UserModel>(x => muteList.Any(u => u.MutedUserId == x.Id));
 
                 if (muteList.Count() > 0)
                 {
@@ -300,17 +308,17 @@ namespace InterTwitter.Services.UserService
                 result.SetError($"{nameof(GetAllMutedUsersAsync)} : exception", "Something went wrong", ex);
             }
 
-            return Task.FromResult(result);
+            return result;
         }
 
-        public Task<AOResult<IEnumerable<UserModel>>> GetAllBlockedUsersAsync()
+        public async Task<AOResult<IEnumerable<UserModel>>> GetAllBlockedUsersAsync()
         {
             var result = new AOResult<IEnumerable<UserModel>>();
             try
             {
-                var blacklist = _mockService.BlackList.Where(x => x.UserId == _currentUserId);
+                var blacklist = await _mockService.GetAsync<BlockModel>(x => x.UserId == _currentUserId);
 
-                var resultList = _mockService.Users.Where(x => blacklist.Any(u => x.Id == u.BlockedUserId));
+                var resultList = await _mockService.GetAsync<UserModel>(x => blacklist.Any(u => x.Id == u.BlockedUserId));
 
                 if (blacklist.Count() > 0)
                 {
@@ -326,7 +334,7 @@ namespace InterTwitter.Services.UserService
                 result.SetError($"{nameof(GetAllBlockedUsersAsync)} : exception", "Something went wrong", ex);
             }
 
-            return Task.FromResult(result);
+            return result;
         }
 
         #endregion

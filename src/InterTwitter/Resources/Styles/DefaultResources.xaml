@@ -1,10 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ResourceDictionary xmlns="http://xamarin.com/schemas/2014/forms"
                     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                    xmlns:sh="http://sharpnado.com"
                     xmlns:controls="clr-namespace:InterTwitter.Controls"
+                    xmlns:sc="clr-namespace:InterTwitter.Controls.StateContainer"
                     xmlns:converters="clr-namespace:InterTwitter.Converters"
+                    xmlns:dataTemplatesSelector="clr-namespace:InterTwitter.Helpers"
                     xmlns:views="clr-namespace:InterTwitter.Views"
-                    xmlns:dataTemplatesSelector="clr-namespace:InterTwitter.Helpers" 
                     xmlns:dataTemplates="clr-namespace:InterTwitter.Views.DataTemplates"
                     xmlns:dataNotificationTemplates="clr-namespace:InterTwitter.Views.DataTemplates.Notification"
                     x:Class="InterTwitter.Resources.Styles.DefaultResources">
@@ -147,5 +149,126 @@
 
     <!-- CONVERTERS -->
     <converters:ListToFirstConverter x:Key="listToFirstConverter"/>
+
+    <!-- CreateTweetPage -->
+
+    <Style x:Key="stackLayout_i1" TargetType="StackLayout">
+        <Setter Property="Spacing" Value="0"/>
+        <Setter Property="Orientation" Value="Horizontal"/>
+        <Setter Property="BackgroundColor" Value="{DynamicResource appcolor_i2}"/>
+    </Style>
+    <Style x:Key="imageButton_i1" TargetType="ImageButton">
+        <Setter Property="HorizontalOptions" Value="Start"/>
+        <Setter Property="Margin" Value="{OnPlatform Android='14, 1, 14, 0', iOS='13, 1, 14, 0'}"/>
+        <Setter Property="WidthRequest" Value="30"/>
+        <Setter Property="BackgroundColor" Value="Transparent"/>
+    </Style>
+    <Style x:Key="button_i1" TargetType="Button">
+        <Setter Property="CornerRadius" Value="14"/>
+        <Setter Property="Margin" Value="{OnPlatform Android='13, 13, 13, 12', iOS='13, 14, 13, 12'}"/>
+        <Setter Property="Padding" Value="{OnPlatform Android='28, 0, 28, 0', iOS='24, 12, 24, 12'}"/>
+        <Setter Property="TextTransform" Value="None"/>
+        <Setter Property="FontFamily" Value="Ubuntu-Medium"/>
+        <Setter Property="FontSize" Value="{DynamicResource tsize_i3}"/>
+        <Setter Property="TextColor" Value="{DynamicResource appcolor_i2}"/>
+    </Style>
+    <Style x:Key="grid_i1" TargetType="Grid">
+        <Setter Property="RowSpacing" Value="0"/>
+        <Setter Property="BackgroundColor" Value="{DynamicResource appcolor_i2}"/>
+    </Style>
+    <Style x:Key="frame_i1" TargetType="Frame">
+        <Setter Property="HeightRequest" Value="{OnPlatform Android='34', iOS='32'}"/>
+        <Setter Property="WidthRequest" Value="{OnPlatform Android='34', iOS='33'}"/>
+        <Setter Property="Margin" Value="{OnPlatform Android='14, 16, 0, 0', iOS='13, 14, 0, 0'}"/>
+        <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+        <Setter Property="HasShadow" Value="False"/>
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="BorderColor" Value="Transparent"/>
+    </Style>
+    <Style x:Key="customScrollView_i1" TargetType="controls:CustomScrollView">
+        <Setter Property="VerticalScrollBarVisibility" Value="Never"/>
+        <Setter Property="BackgroundColor" Value="{DynamicResource appcolor_i2}"/>
+    </Style>
+    <Style x:Key="customEditor_i1" TargetType="controls:CustomEditor">
+        <Setter Property="TextColor" Value="{DynamicResource appcolor_i3}"/>
+        <Setter Property="FontSize" Value="{DynamicResource tsize_i4}"/>
+        <Setter Property="FontFamily" Value="Ubuntu-Regular"/>
+        <Setter Property="BackgroundColor" Value="{DynamicResource appcolor_i2}"/>
+        <Setter Property="PlaceholderColor" Value="{DynamicResource appcolor_i4}"/>
+        <Setter Property="VerticalOptions" Value="Start"/>
+        <Setter Property="IsExpandable" Value="True"/>
+        <Setter Property="Margin" Value="{OnPlatform Android='7, 21, 5, 0', iOS='4, 11, 0, 0'}"/>
+    </Style>
+    <Style x:Key="stateContainer_i1" TargetType="sc:StateContainer">
+        <Setter Property="Margin" Value="{OnPlatform Android='7, 7, 5, 0', iOS='4, 7, 0, 0'}"/>
+        <Setter Property="VerticalOptions" Value="Start"/>
+    </Style>
+    <Style x:Key="flexLayout_i1" TargetType="FlexLayout">
+        <Setter Property="Direction" Value="Row"/>
+        <Setter Property="Wrap" Value="Wrap"/>
+        <Setter Property="VerticalOptions" Value="Start"/>
+        <Setter Property="JustifyContent" Value="Start"/>
+    </Style>
+    <Style x:Key="grid_i2" TargetType="Grid">
+        <Setter Property="HeightRequest" Value="65"/>
+        <Setter Property="WidthRequest" Value="45"/>
+        <Setter Property="Margin" Value="{OnPlatform Android='0, 0, 17, 0', iOS='0, 0, 16, 0'}"/>
+    </Style>
+    <Style x:Key="frame_i2" TargetType="Frame">
+        <Setter Property="BackgroundColor" Value="Silver"/>
+        <Setter Property="IsClippedToBounds" Value="True"/>
+        <Setter Property="HasShadow" Value="False"/>
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="CornerRadius" Value="0"/>
+    </Style>
+    <Style x:Key="frame_i3" TargetType="Frame">
+        <Setter Property="HasShadow" Value="False"/>
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="Margin" Value="22, -62, -22, 62"/>
+        <Setter Property="BackgroundColor" Value="Transparent"/>
+    </Style>
+    <Style x:Key="image_i1" TargetType="Image">
+        <Setter Property="HeightRequest" Value="21"/>
+        <Setter Property="WidthRequest" Value="21"/>
+    </Style>
+    <Style x:Key="label_i1" TargetType="Label">
+        <Setter Property="TextColor" Value="{DynamicResource appcolor_i1}"/>
+        <Setter Property="FontSize" Value="{DynamicResource tsize_i4}"/>
+        <Setter Property="FontFamily" Value="Ubuntu-Medium"/>
+    </Style>
+    <Style x:Key="shadows_i1" TargetType="sh:Shadows">
+        <Setter Property="HeightRequest" Value="56"/>
+        <Setter Property="VerticalOptions" Value="EndAndExpand"/>
+        <Setter Property="Shades" Value="{sh:SingleShade Offset='0, -2.32',
+                                                         Opacity={OnPlatform Android=0.05, iOS=0.05},
+                                                         BlurRadius={OnPlatform Android=14, iOS=14},
+                                                         Color=Black}"/>
+    </Style>
+    <Style x:Key="stackLayout_i2" TargetType="StackLayout">
+        <Setter Property="Spacing" Value="0"/>
+        <Setter Property="BackgroundColor" Value="{DynamicResource appcolor_i2}"/>
+    </Style>
+    <Style x:Key="stackLayout_i3" TargetType="StackLayout">
+        <Setter Property="Spacing" Value="0"/>
+        <Setter Property="BackgroundColor" Value="{DynamicResource appcolor_i2}"/>
+    </Style>
+    <Style x:Key="boxView_i1" TargetType="BoxView">
+        <Setter Property="Color" Value="{DynamicResource appcolor_i6}"/>
+        <Setter Property="HeightRequest" Value="1"/>
+    </Style>
+    <Style x:Key="imageButton_i3" TargetType="ImageButton">
+        <Setter Property="Margin" Value="13.93, 4, 0, 4"/>
+        <Setter Property="WidthRequest" Value="28.86"/>
+        <Setter Property="BackgroundColor" Value="Transparent"/>
+    </Style>
+    <Style x:Key="circleProgressBar_i1" TargetType="controls:CircleProgressBar">
+        <Setter Property="FontFamily" Value="Ubuntu-Regular"/>
+        <Setter Property="LineWidth" Value="15"/>
+        <Setter Property="BackgroundLineColor" Value="{DynamicResource appcolor_i5}"/>
+        <Setter Property="BackgroundProgressColor" Value="{DynamicResource appcolor_i2}"/>
+        <Setter Property="BackgroundColor" Value="Transparent"/>
+        <Setter Property="Padding" Value="16"/>
+        <Setter Property="HorizontalOptions" Value="EndAndExpand"/>
+    </Style>
 
 </ResourceDictionary>

@@ -1,6 +1,6 @@
 ﻿using Xamarin.Essentials;
 
-namespace InterTwitter.Services.Settings
+namespace InterTwitter.Services
 {
     public class SettingsManager : ISettingsManager
     {

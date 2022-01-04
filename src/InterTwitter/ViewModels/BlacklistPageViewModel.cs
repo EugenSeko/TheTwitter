@@ -1,12 +1,13 @@
 ﻿using InterTwitter.Helpers;
 using InterTwitter.Extensions;
-using InterTwitter.Services.UserService;
+using InterTwitter.Services;
 using Prism.Navigation;
 using Prism.Services.Dialogs;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using InterTwitter.Views;
+using InterTwitter.Resources.Strings;
 
 namespace InterTwitter.ViewModels
 {
@@ -51,7 +52,7 @@ namespace InterTwitter.ViewModels
         {
             if (_isBlacklistPage = parameters.ContainsKey(Constants.Navigation.BLACKLIST))
             {
-                Title = Resources.Strings.Strings.Blacklist;
+                Title = Strings.Blacklist;
                 await InitBlacklistAsync();
             }
             else if (_isMutelistPage = parameters.ContainsKey(Constants.Navigation.MUTELIST))
@@ -104,17 +105,17 @@ namespace InterTwitter.ViewModels
                 string partOfMessage = string.Empty;
                 if (_isBlacklistPage)
                 {
-                    partOfMessage = Resources.Strings.Strings.FromTheBlacklist;
+                    partOfMessage = Strings.FromTheBlacklist;
                 }
                 else if (_isMutelistPage)
                 {
-                    partOfMessage = Resources.Strings.Strings.FromTheMute;
+                    partOfMessage = Strings.FromTheMute;
                 }
 
                 var param = new DialogParameters();
-                param.Add(Constants.DialogParameterKeys.TITLE, $"{Resources.Strings.Strings.Remove} {userViewModel.Name} {partOfMessage}");
-                param.Add(Constants.DialogParameterKeys.OK_BUTTON_TEXT, Resources.Strings.Strings.Ok);
-                param.Add(Constants.DialogParameterKeys.CANCEL_BUTTON_TEXT, Resources.Strings.Strings.Cancel);
+                param.Add(Constants.DialogParameterKeys.TITLE, $"{Strings.Remove} {userViewModel.Name} {partOfMessage}");
+                param.Add(Constants.DialogParameterKeys.OK_BUTTON_TEXT, Strings.Ok);
+                param.Add(Constants.DialogParameterKeys.CANCEL_BUTTON_TEXT, Strings.Cancel);
 
                 await Rg.Plugins.Popup.Services.PopupNavigation.Instance.PushAsync(new AlertView(param, CloseDialogCallback));
             }

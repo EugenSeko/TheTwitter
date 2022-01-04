@@ -12,6 +12,8 @@ namespace InterTwitter.Views
         public EditProfilePage()
         {
             InitializeComponent();
+            backgroundImage.WidthRequest = Prism.PrismApplicationBase.Current.MainPage.Width;
+            backgroundImage.HeightRequest = Prism.PrismApplicationBase.Current.MainPage.Height * 0.19;
         }
 
         protected override bool OnBackButtonPressed()

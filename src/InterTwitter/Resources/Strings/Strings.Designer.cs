@@ -7,505 +7,755 @@
 //     the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-
-namespace InterTwitter.Resources.Strings {
+namespace InterTwitter.Resources.Strings
+{
     using System;
     using System.Reflection;
-    
-    
+
+
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Strings {
-        
+    internal class Strings
+    {
+
         private static System.Resources.ResourceManager resourceMan;
-        
+
         private static System.Globalization.CultureInfo resourceCulture;
-        
+
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Strings() {
+        internal Strings()
+        {
         }
-        
+
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static System.Resources.ResourceManager ResourceManager {
-            get {
-                if (object.Equals(null, resourceMan)) {
+        internal static System.Resources.ResourceManager ResourceManager
+        {
+            get
+            {
+                if (object.Equals(null, resourceMan))
+                {
                     System.Resources.ResourceManager temp = new System.Resources.ResourceManager("InterTwitter.Resources.Strings.Strings", typeof(Strings).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
             }
         }
-        
+
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static System.Globalization.CultureInfo Culture {
-            get {
+        internal static System.Globalization.CultureInfo Culture
+        {
+            get
+            {
                 return resourceCulture;
             }
-            set {
+            set
+            {
                 resourceCulture = value;
             }
         }
-        
-        internal static string AddToBlacklist {
-            get {
+
+        internal static string AddToBlacklist
+        {
+            get
+            {
                 return ResourceManager.GetString("AddToBlacklist", resourceCulture);
             }
         }
-        
-        internal static string AddToMute {
-            get {
+
+        internal static string AddToMute
+        {
+            get
+            {
                 return ResourceManager.GetString("AddToMute", resourceCulture);
             }
         }
-        
-        internal static string Add {
-            get {
+
+        internal static string Add
+        {
+            get
+            {
                 return ResourceManager.GetString("Add", resourceCulture);
             }
         }
-        
-        internal static string Alert {
-            get {
+
+        internal static string Alert
+        {
+            get
+            {
                 return ResourceManager.GetString("Alert", resourceCulture);
             }
         }
-        
-        internal static string AlertDatabase {
-            get {
+
+        internal static string AlertDatabase
+        {
+            get
+            {
                 return ResourceManager.GetString("AlertDatabase", resourceCulture);
             }
         }
-        
-        internal static string AlertDataIncorrect {
-            get {
+
+        internal static string AlertDataIncorrect
+        {
+            get
+            {
                 return ResourceManager.GetString("AlertDataIncorrect", resourceCulture);
             }
         }
-        
-        internal static string AlertEmailEmpty {
-            get {
+
+        internal static string AlertEmailEmpty
+        {
+            get
+            {
                 return ResourceManager.GetString("AlertEmailEmpty", resourceCulture);
             }
         }
-        
-        internal static string AlertEmailInvalid {
-            get {
+
+        internal static string AlertEmailInvalid
+        {
+            get
+            {
                 return ResourceManager.GetString("AlertEmailInvalid", resourceCulture);
             }
         }
-        
-        internal static string AlertEmailNoA {
-            get {
+
+        internal static string AlertEmailNoA
+        {
+            get
+            {
                 return ResourceManager.GetString("AlertEmailNoA", resourceCulture);
             }
         }
-        
-        internal static string AlertInvalidLogin {
-            get {
+
+        internal static string AlertErrorTrimmingVideo
+        {
+            get
+            {
+                return ResourceManager.GetString("AlertErrorTrimmingVideo", resourceCulture);
+            }
+        }
+
+        internal static string AlertFileNotExist
+        {
+            get
+            {
+                return ResourceManager.GetString("AlertFileNotExist", resourceCulture);
+            }
+        }
+
+        internal static string AlertInvalidLogin
+        {
+            get
+            {
                 return ResourceManager.GetString("AlertInvalidLogin", resourceCulture);
             }
         }
-        
-        internal static string AlertInvalidPassword {
-            get {
+
+        internal static string AlertInvalidPassword
+        {
+            get
+            {
                 return ResourceManager.GetString("AlertInvalidPassword", resourceCulture);
             }
         }
-        
-        internal static string AlertLoginNotExist {
-            get {
+
+        internal static string AlertLimitSizeGif
+        {
+            get
+            {
+                return ResourceManager.GetString("AlertLimitSizeGif", resourceCulture);
+            }
+        }
+
+        internal static string AlertLimitSizePhoto
+        {
+            get
+            {
+                return ResourceManager.GetString("AlertLimitSizePhoto", resourceCulture);
+            }
+        }
+
+        internal static string AlertLimitSizeVideo
+        {
+            get
+            {
+                return ResourceManager.GetString("AlertLimitSizeVideo", resourceCulture);
+            }
+        }
+
+        internal static string AlertLoginNotExist
+        {
+            get
+            {
                 return ResourceManager.GetString("AlertLoginNotExist", resourceCulture);
             }
         }
-        
-        internal static string AlertLoginTaken {
-            get {
+
+        internal static string AlertLoginTaken
+        {
+            get
+            {
                 return ResourceManager.GetString("AlertLoginTaken", resourceCulture);
             }
         }
-        
-        internal static string AlertNameEmpty {
-            get {
+
+        internal static string AlertNameEmpty
+        {
+            get
+            {
                 return ResourceManager.GetString("AlertNameEmpty", resourceCulture);
             }
         }
-        
-        internal static string AlertNameLength {
-            get {
+
+        internal static string AlertNameLength
+        {
+            get
+            {
                 return ResourceManager.GetString("AlertNameLength", resourceCulture);
             }
         }
-        
-        internal static string AlertNameLetter {
-            get {
+
+        internal static string AlertNameLetter
+        {
+            get
+            {
                 return ResourceManager.GetString("AlertNameLetter", resourceCulture);
             }
         }
-        
-        internal static string AlertPasswordEmpty {
-            get {
+
+        internal static string AlertNeedAccessPhotosGallery
+        {
+            get
+            {
+                return ResourceManager.GetString("AlertNeedAccessPhotosGallery", resourceCulture);
+            }
+        }
+
+        internal static string AlertOnlyGif
+        {
+            get
+            {
+                return ResourceManager.GetString("AlertOnlyGif", resourceCulture);
+            }
+        }
+
+        internal static string AlertOnlyPicture
+        {
+            get
+            {
+                return ResourceManager.GetString("AlertOnlyPicture", resourceCulture);
+            }
+        }
+
+        internal static string AlertPasswordEmpty
+        {
+            get
+            {
                 return ResourceManager.GetString("AlertPasswordEmpty", resourceCulture);
             }
         }
-        
-        internal static string AlertPasswordLength {
-            get {
+
+        internal static string AlertPasswordLength
+        {
+            get
+            {
                 return ResourceManager.GetString("AlertPasswordLength", resourceCulture);
             }
         }
-        
-        internal static string AlertPasswordLetterDigit {
-            get {
+
+        internal static string AlertPasswordLetterDigit
+        {
+            get
+            {
                 return ResourceManager.GetString("AlertPasswordLetterDigit", resourceCulture);
             }
         }
-        
-        internal static string AlertPasswordNotEqual {
-            get {
+
+        internal static string AlertPasswordNotEqual
+        {
+            get
+            {
                 return ResourceManager.GetString("AlertPasswordNotEqual", resourceCulture);
             }
         }
-        
-        internal static string Bookmarks {
-            get {
+
+        internal static string Bookmarks
+        {
+            get
+            {
                 return ResourceManager.GetString("Bookmarks", resourceCulture);
             }
         }
-        
-        internal static string Confirm {
-            get {
-                return ResourceManager.GetString("Confirm", resourceCulture);
-            }
-        }
-        
-        internal static string AlreadyBlocked {
-            get {
-                return ResourceManager.GetString("AlreadyBlocked", resourceCulture);
-            }
-        }
-        
-        internal static string Cancel {
-            get {
+
+        internal static string Cancel
+        {
+            get
+            {
                 return ResourceManager.GetString("Cancel", resourceCulture);
             }
         }
-        
-        internal static string ConfirmPassword {
-            get {
+
+        internal static string Confirm
+        {
+            get
+            {
+                return ResourceManager.GetString("Confirm", resourceCulture);
+            }
+        }
+
+        internal static string ConfirmComeBack
+        {
+            get
+            {
+                return ResourceManager.GetString("ConfirmComeBack", resourceCulture);
+            }
+        }
+
+        internal static string AlreadyBlocked
+        {
+            get
+            {
+                return ResourceManager.GetString("AlreadyBlocked", resourceCulture);
+            }
+        }
+
+        internal static string ConfirmPassword
+        {
+            get
+            {
                 return ResourceManager.GetString("ConfirmPassword", resourceCulture);
             }
         }
-        
-        internal static string CreateYourAccount {
-            get {
+
+        internal static string CreateYourAccount
+        {
+            get
+            {
                 return ResourceManager.GetString("CreateYourAccount", resourceCulture);
             }
         }
-        
-        internal static string DeleteAllbookmarks {
-            get {
+
+        internal static string DeleteAllbookmarks
+        {
+            get
+            {
                 return ResourceManager.GetString("DeleteAllbookmarks", resourceCulture);
             }
         }
-        
-        internal static string DoNotMatch {
-            get {
+
+        internal static string DoNotMatch
+        {
+            get
+            {
                 return ResourceManager.GetString("DoNotMatch", resourceCulture);
             }
         }
-        
-        internal static string Email {
-            get {
+
+        internal static string Email
+        {
+            get
+            {
                 return ResourceManager.GetString("Email", resourceCulture);
             }
         }
-        
-        internal static string FailureUsersNotFound {
-            get {
+
+        internal static string FailureUsersNotFound
+        {
+            get
+            {
                 return ResourceManager.GetString("FailureUsersNotFound", resourceCulture);
             }
         }
-        
-        internal static string EmailIsNotValid {
-            get {
+
+        internal static string EmailIsNotValid
+        {
+            get
+            {
                 return ResourceManager.GetString("EmailIsNotValid", resourceCulture);
             }
         }
-        
-        internal static string FromTheBlacklist {
-            get {
+
+        internal static string FromTheBlacklist
+        {
+            get
+            {
                 return ResourceManager.GetString("FromTheBlacklist", resourceCulture);
             }
         }
-        
-        internal static string FromTheMute {
-            get {
+
+        internal static string FromTheMute
+        {
+            get
+            {
                 return ResourceManager.GetString("FromTheMute", resourceCulture);
             }
         }
-        
-        internal static string GetYourAccount {
-            get {
+
+        internal static string GetYourAccount
+        {
+            get
+            {
                 return ResourceManager.GetString("GetYourAccount", resourceCulture);
             }
         }
-        
-        internal static string InaccurateRequest {
-            get {
+
+        internal static string InaccurateRequest
+        {
+            get
+            {
                 return ResourceManager.GetString("InaccurateRequest", resourceCulture);
             }
         }
-        
-        internal static string Likes {
-            get {
+
+        internal static string Likes
+        {
+            get
+            {
                 return ResourceManager.GetString("Likes", resourceCulture);
             }
         }
-        
-        internal static string LogIn {
-            get {
+
+        internal static string LogIn
+        {
+            get
+            {
                 return ResourceManager.GetString("LogIn", resourceCulture);
             }
         }
-        
-        internal static string Name {
-            get {
-                return ResourceManager.GetString("Name", resourceCulture);
-            }
-        }
-        
-        internal static string NameIsNotValid {
-            get {
-                return ResourceManager.GetString("NameIsNotValid", resourceCulture);
-            }
-        }
-        
-        internal static string NewPasswordIsNotValid {
-            get {
-                return ResourceManager.GetString("NewPasswordIsNotValid", resourceCulture);
-            }
-        }
-        
-        internal static string Next {
-            get {
-                return ResourceManager.GetString("Next", resourceCulture);
-            }
-        }
-        
-        internal static string NotFoundBookmark {
-            get {
-                return ResourceManager.GetString("NotFoundBookmark", resourceCulture);
-            }
-        }
-        
-        internal static string NotFoundLike {
-            get {
-                return ResourceManager.GetString("NotFoundLike", resourceCulture);
-            }
-        }
-        
-        internal static string NotFoundNotification {
-            get {
-                return ResourceManager.GetString("NotFoundNotification", resourceCulture);
-            }
-        }
-        
-        internal static string Notification {
-            get {
-                return ResourceManager.GetString("Notification", resourceCulture);
-            }
-        }
-        
-        internal static string NoTweets {
-            get {
-                return ResourceManager.GetString("NoTweets", resourceCulture);
-            }
-        }
-        
-        internal static string NoResultsFor {
-            get {
-                return ResourceManager.GetString("NoResultsFor", resourceCulture);
-            }
-        }
-        
-        internal static string Ok {
-            get {
-                return ResourceManager.GetString("Ok", resourceCulture);
-            }
-        }
-        
-        internal static string OldPassEmpty {
-            get {
-                return ResourceManager.GetString("OldPassEmpty", resourceCulture);
-            }
-        }
-        
-        internal static string OldPassWrong {
-            get {
-                return ResourceManager.GetString("OldPassWrong", resourceCulture);
-            }
-        }
-        
-        internal static string Password {
-            get {
-                return ResourceManager.GetString("Password", resourceCulture);
-            }
-        }
-        
-        internal static string PasswordIncorrect {
-            get {
-                return ResourceManager.GetString("PasswordIncorrect", resourceCulture);
-            }
-        }
-        
-        internal static string PleaseName {
-            get {
-                return ResourceManager.GetString("PleaseName", resourceCulture);
-            }
-        }
-        
-        internal static string PopularTheme {
-            get {
-                return ResourceManager.GetString("PopularTheme", resourceCulture);
-            }
-        }
-        
-        internal static string Search {
-            get {
-                return ResourceManager.GetString("Search", resourceCulture);
-            }
-        }
-        
-        internal static string Posts {
-            get {
-                return ResourceManager.GetString("Posts", resourceCulture);
-            }
-        }
-        
-        internal static string Remove {
-            get {
-                return ResourceManager.GetString("Remove", resourceCulture);
-            }
-        }
-        
-        internal static string SaveChanges {
-            get {
-                return ResourceManager.GetString("SaveChanges", resourceCulture);
-            }
-        }
-        
-        internal static string SignUp {
-            get {
-                return ResourceManager.GetString("SignUp", resourceCulture);
-            }
-        }
-        
-        internal static string SomeIssues {
-            get {
-                return ResourceManager.GetString("SomeIssues", resourceCulture);
-            }
-        }
-        
-        internal static string UserBlocked {
-            get {
-                return ResourceManager.GetString("UserBlocked", resourceCulture);
-            }
-        }
-        
-        internal static string UserMuted {
-            get {
-                return ResourceManager.GetString("UserMuted", resourceCulture);
-            }
-        }
-        
-        internal static string UserNotSeeYouPost {
-            get {
-                return ResourceManager.GetString("UserNotSeeYouPost", resourceCulture);
-            }
-        }
-        
-        internal static string UserCanSeeInfo {
-            get {
-                return ResourceManager.GetString("UserCanSeeInfo", resourceCulture);
-            }
-        }
-        
-        internal static string WrongEmail {
-            get {
-                return ResourceManager.GetString("WrongEmail", resourceCulture);
-            }
-        }
-        
-        internal static string WrongResult {
-            get {
-                return ResourceManager.GetString("WrongResult", resourceCulture);
-            }
-        }
-        
-        internal static string YouHaveNoBookmarks {
-            get {
-                return ResourceManager.GetString("YouHaveNoBookmarks", resourceCulture);
-            }
-        }
-        
-        internal static string YouNeedPassword {
-            get {
-                return ResourceManager.GetString("YouNeedPassword", resourceCulture);
-            }
-        }
-        
-        internal static string ToMute {
-            get {
-                return ResourceManager.GetString("ToMute", resourceCulture);
-            }
-        }
-        
-        internal static string ToBlacklist {
-            get {
-                return ResourceManager.GetString("ToBlacklist", resourceCulture);
-            }
-        }
-        
-        internal static string Blacklist {
-            get {
-                return ResourceManager.GetString("Blacklist", resourceCulture);
-            }
-        }
-        
-        internal static string Mute {
-            get {
+
+        internal static string Mute
+        {
+            get
+            {
                 return ResourceManager.GetString("Mute", resourceCulture);
             }
         }
-        
-        internal static string ChangeProfile {
-            get {
+
+        internal static string Name
+        {
+            get
+            {
+                return ResourceManager.GetString("Name", resourceCulture);
+            }
+        }
+
+        internal static string NameIsNotValid
+        {
+            get
+            {
+                return ResourceManager.GetString("NameIsNotValid", resourceCulture);
+            }
+        }
+
+        internal static string NewPasswordIsNotValid
+        {
+            get
+            {
+                return ResourceManager.GetString("NewPasswordIsNotValid", resourceCulture);
+            }
+        }
+
+        internal static string Next
+        {
+            get
+            {
+                return ResourceManager.GetString("Next", resourceCulture);
+            }
+        }
+
+        internal static string NoResultsFor
+        {
+            get
+            {
+                return ResourceManager.GetString("NoResultsFor", resourceCulture);
+            }
+        }
+
+        internal static string NotFoundBookmark
+        {
+            get
+            {
+                return ResourceManager.GetString("NotFoundBookmark", resourceCulture);
+            }
+        }
+
+        internal static string NotFoundLike
+        {
+            get
+            {
+                return ResourceManager.GetString("NotFoundLike", resourceCulture);
+            }
+        }
+
+        internal static string NotFoundNotification
+        {
+            get
+            {
+                return ResourceManager.GetString("NotFoundNotification", resourceCulture);
+            }
+        }
+
+        internal static string Notification
+        {
+            get
+            {
+                return ResourceManager.GetString("Notification", resourceCulture);
+            }
+        }
+
+        internal static string NoTweets
+        {
+            get
+            {
+                return ResourceManager.GetString("NoTweets", resourceCulture);
+            }
+        }
+
+        internal static string Ok
+        {
+            get
+            {
+                return ResourceManager.GetString("Ok", resourceCulture);
+            }
+        }
+
+        internal static string OldPassEmpty
+        {
+            get
+            {
+                return ResourceManager.GetString("OldPassEmpty", resourceCulture);
+            }
+        }
+
+        internal static string OldPassWrong
+        {
+            get
+            {
+                return ResourceManager.GetString("OldPassWrong", resourceCulture);
+            }
+        }
+
+        internal static string Password
+        {
+            get
+            {
+                return ResourceManager.GetString("Password", resourceCulture);
+            }
+        }
+
+        internal static string PasswordIncorrect
+        {
+            get
+            {
+                return ResourceManager.GetString("PasswordIncorrect", resourceCulture);
+            }
+        }
+
+        internal static string PleaseName
+        {
+            get
+            {
+                return ResourceManager.GetString("PleaseName", resourceCulture);
+            }
+        }
+
+        internal static string PopularTheme
+        {
+            get
+            {
+                return ResourceManager.GetString("PopularTheme", resourceCulture);
+            }
+        }
+
+        internal static string Post
+        {
+            get
+            {
+                return ResourceManager.GetString("Post", resourceCulture);
+            }
+        }
+
+        internal static string Search
+        {
+            get
+            {
+                return ResourceManager.GetString("Search", resourceCulture);
+            }
+        }
+
+        internal static string Posts
+        {
+            get
+            {
+                return ResourceManager.GetString("Posts", resourceCulture);
+            }
+        }
+
+        internal static string Remove
+        {
+            get
+            {
+                return ResourceManager.GetString("Remove", resourceCulture);
+            }
+        }
+
+        internal static string SaveChanges
+        {
+            get
+            {
+                return ResourceManager.GetString("SaveChanges", resourceCulture);
+            }
+        }
+
+        internal static string Share
+        {
+            get
+            {
+                return ResourceManager.GetString("Share", resourceCulture);
+            }
+        }
+
+        internal static string SignUp
+        {
+            get
+            {
+                return ResourceManager.GetString("SignUp", resourceCulture);
+            }
+        }
+
+        internal static string Video
+        {
+            get
+            {
+                return ResourceManager.GetString("Video", resourceCulture);
+            }
+        }
+
+        internal static string YouNeedPassword
+        {
+            get
+            {
+                return ResourceManager.GetString("YouNeedPassword", resourceCulture);
+            }
+        }
+
+        internal static string SomeIssues
+        {
+            get
+            {
+                return ResourceManager.GetString("SomeIssues", resourceCulture);
+            }
+        }
+
+        internal static string UserBlocked
+        {
+            get
+            {
+                return ResourceManager.GetString("UserBlocked", resourceCulture);
+            }
+        }
+
+        internal static string UserMuted
+        {
+            get
+            {
+                return ResourceManager.GetString("UserMuted", resourceCulture);
+            }
+        }
+
+        internal static string UserNotSeeYouPost
+        {
+            get
+            {
+                return ResourceManager.GetString("UserNotSeeYouPost", resourceCulture);
+            }
+        }
+
+        internal static string UserCanSeeInfo
+        {
+            get
+            {
+                return ResourceManager.GetString("UserCanSeeInfo", resourceCulture);
+            }
+        }
+
+        internal static string WrongEmail
+        {
+            get
+            {
+                return ResourceManager.GetString("WrongEmail", resourceCulture);
+            }
+        }
+
+        internal static string WrongResult
+        {
+            get
+            {
+                return ResourceManager.GetString("WrongResult", resourceCulture);
+            }
+        }
+
+        internal static string YouHaveNoBookmarks
+        {
+            get
+            {
+                return ResourceManager.GetString("YouHaveNoBookmarks", resourceCulture);
+            }
+        }
+
+        internal static string ToMute
+        {
+            get
+            {
+                return ResourceManager.GetString("ToMute", resourceCulture);
+            }
+        }
+
+        internal static string ToBlacklist
+        {
+            get
+            {
+                return ResourceManager.GetString("ToBlacklist", resourceCulture);
+            }
+        }
+
+        internal static string Blacklist
+        {
+            get
+            {
+                return ResourceManager.GetString("Blacklist", resourceCulture);
+            }
+        }
+
+        internal static string ChangeProfile
+        {
+            get
+            {
                 return ResourceManager.GetString("ChangeProfile", resourceCulture);
             }
         }
-        
-        internal static string Muted {
-            get {
+
+        internal static string Muted
+        {
+            get
+            {
                 return ResourceManager.GetString("Muted", resourceCulture);
             }
         }
-        
-        internal static string MutedProfiles {
-            get {
+
+        internal static string MutedProfiles
+        {
+            get
+            {
                 return ResourceManager.GetString("MutedProfiles", resourceCulture);
             }
         }
-        
-        internal static string ProfileInBlacklist {
-            get {
+
+        internal static string ProfileInBlacklist
+        {
+            get
+            {
                 return ResourceManager.GetString("ProfileInBlacklist", resourceCulture);
-            }
-        }
-        
-        internal static string Share {
-            get {
-                return ResourceManager.GetString("Share", resourceCulture);
             }
         }
     }

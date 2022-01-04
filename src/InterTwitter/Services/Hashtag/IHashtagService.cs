@@ -3,11 +3,11 @@ using InterTwitter.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace InterTwitter.Services.Hashtag
+namespace InterTwitter.Services
 {
     public interface IHashtagService
     {
-        Task<AOResult> IncreaseHashtagPopularityByOne(HashtagModel hashtag);
+        Task<AOResult<int>> IncreaseHashtagPopularityByOne(HashtagModel hashtag);
 
         Task<AOResult> DecreaseHashtagPopularityByOne(HashtagModel hashtag);
 

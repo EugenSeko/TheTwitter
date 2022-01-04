@@ -19,9 +19,11 @@ namespace InterTwitter.ViewModels
     {
         private readonly INotificationService _notificationService;
 
-        private readonly IAuthorizationService _authorizationService;
+        private readonly ISettingsManager _settingsManager;
 
         private readonly IRegistrationService _registrationService;
+
+        private readonly IUserService _userService;
 
         private UserModel _currentUser;
         private int _userId;
@@ -29,14 +31,16 @@ namespace InterTwitter.ViewModels
         public NotificationPageViewModel(
             INotificationService notificationService,
             INavigationService navigationService,
-            IAuthorizationService authorizationService,
+            IUserService userService,
+            ISettingsManager settingsManager,
             IRegistrationService registrationService)
             : base(navigationService)
         {
             IconPath = Prism.PrismApplicationBase.Current.Resources["ic_notifications_gray"] as ImageSource;
             _notificationService = notificationService;
-            _authorizationService = authorizationService;
+            _settingsManager = settingsManager;
             _registrationService = registrationService;
+            _userService = userService;
         }
 
         #region -- Public Properties --
@@ -99,16 +103,39 @@ namespace InterTwitter.ViewModels
 
         public override async void OnNavigatedTo(INavigationParameters parameters)
         {
-            _userId = _authorizationService.UserId;
+            _userId = _settingsManager.UserId;
             var result = await _registrationService.GetByIdAsync(_userId);
+            var mutedUsers = await _userService.GetAllMutedUsersAsync();
+            var blockedUsers = await _userService.GetAllBlockedUsersAsync();
 
             if (result.IsSuccess)
             {
                 _currentUser = result.Result;
 
                 var resultNotification = await _notificationService.GetNotificationsAsync(_userId);
-
-                if (resultNotification.IsSuccess)
+                if (mutedUsers.IsSuccess && mutedUsers.Result != null && blockedUsers.IsSuccess && blockedUsers.Result != null)
+                {
+                    Tweets = new ObservableCollection<BaseNotificationViewModel>(resultNotification.Result
+                            .Select(x => x.Media == EAttachedMediaType.Photos || x.Media == EAttachedMediaType.Gif ? x.ToImagesNotificationViewModel() : x.ToBaseNotificationViewModel())
+                            .Where(t => mutedUsers.Result.All(u => u.Id != t.UserId))
+                            .Where(t => blockedUsers.Result.All(u => u.Id != t.UserId))
+                            .OrderByDescending(x => x.CreationTime));
+                }
+                else if (mutedUsers.IsSuccess && mutedUsers.Result != null)
+                {
+                    Tweets = new ObservableCollection<BaseNotificationViewModel>(resultNotification.Result
+                           .Select(x => x.Media == EAttachedMediaType.Photos || x.Media == EAttachedMediaType.Gif ? x.ToImagesNotificationViewModel() : x.ToBaseNotificationViewModel())
+                           .Where(t => mutedUsers.Result.All(u => u.Id != t.UserId))
+                           .OrderByDescending(x => x.CreationTime));
+                }
+                else if (blockedUsers.IsSuccess && blockedUsers.Result != null)
+                {
+                    Tweets = new ObservableCollection<BaseNotificationViewModel>(resultNotification.Result
+                           .Select(x => x.Media == EAttachedMediaType.Photos || x.Media == EAttachedMediaType.Gif ? x.ToImagesNotificationViewModel() : x.ToBaseNotificationViewModel())
+                           .Where(t => blockedUsers.Result.All(u => u.Id != t.UserId))
+                           .OrderByDescending(x => x.CreationTime));
+                }
+                else if (resultNotification.IsSuccess)
                 {
                     Tweets = new ObservableCollection<BaseNotificationViewModel>(resultNotification.Result
                             .Select(x => x.Media == EAttachedMediaType.Photos || x.Media == EAttachedMediaType.Gif ? x.ToImagesNotificationViewModel() : x.ToBaseNotificationViewModel())

@@ -243,9 +243,6 @@
   <data name="NotFoundBookmark" xml:space="preserve">
     <value>not found any bookmark</value>
   </data>
-  <data name="NotFoundBookmark" xml:space="preserve">
-    <value>not found any bookmark</value>
-  </data>
   <data name="NotFoundLike" xml:space="preserve">
     <value>not found any like</value>
   </data>
@@ -350,5 +347,41 @@
   </data>
   <data name="Share" xml:space="preserve">
     <value>Share</value>
+  </data>
+  <data name="AlertErrorTrimmingVideo" xml:space="preserve">
+    <value>Error trimming video</value>
+  </data>
+  <data name="AlertFileNotExist" xml:space="preserve">
+    <value>File does not exist</value>
+  </data>
+  <data name="AlertLimitSizeGif" xml:space="preserve">
+    <value>The size of the gif should not exceed 5 MB</value>
+  </data>
+  <data name="AlertLimitSizePhoto" xml:space="preserve">
+    <value>The size of the photo should not exceed 5 MB</value>
+  </data>
+  <data name="AlertLimitSizeVideo" xml:space="preserve">
+    <value>The size of the video should not exceed 15 MB</value>
+  </data>
+  <data name="AlertNeedAccessPhotosGallery" xml:space="preserve">
+    <value>This app needs access to photos gallery for picking photos and videos.</value>
+  </data>
+  <data name="AlertOnlyGif" xml:space="preserve">
+    <value>Only gif</value>
+  </data>
+  <data name="AlertOnlyPicture" xml:space="preserve">
+    <value>Only picture</value>
+  </data>
+  <data name="ConfirmComeBack" xml:space="preserve">
+    <value>Do you want to come back?</value>
+  </data>
+  <data name="PlaceholderEditor" xml:space="preserve">
+    <value>Start writing</value>
+  </data>
+  <data name="Post" xml:space="preserve">
+    <value>Post</value>
+  </data>
+  <data name="Video" xml:space="preserve">
+    <value>Video</value>
   </data>
 </root>

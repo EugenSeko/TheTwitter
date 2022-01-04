@@ -27,6 +27,7 @@
             <controls:CustomNavigationbar Grid.Row="0"
                                           Title="Home"
                                           RightButtonImageSource="ic_add_blue"
+                                          RightUserButtonCommand="{Binding AddTweetCommandAsync}"
                                           LeftButtonImageSource="pic_profile_small"
                                           LeftAddButtonCommand="{Binding OpenFlyoutCommandAsync}"/>
 

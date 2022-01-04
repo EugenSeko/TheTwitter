@@ -44,8 +44,8 @@ namespace InterTwitter.ViewModels
             set => SetProperty(ref _imageSource, value);
         }
 
-        private ObservableCollection<BindableBase> _contentCollection;
-        public ObservableCollection<BindableBase> ContentCollection
+        private ObservableCollection<BaseTweetViewModel> _contentCollection;
+        public ObservableCollection<BaseTweetViewModel> ContentCollection
         {
             get => _contentCollection;
             set => SetProperty(ref _contentCollection, value);

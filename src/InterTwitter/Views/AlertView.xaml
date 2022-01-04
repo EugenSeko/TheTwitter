@@ -1,8 +1,10 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <rg:PopupPage xmlns="http://xamarin.com/schemas/2014/forms" 
               xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-              x:Class="InterTwitter.Views.AlertView"
-              xmlns:rg="http://rotorgames.com">
+              xmlns:local="clr-namespace:InterTwitter.ViewModels"
+              x:DataType="local:AlertViewModel"
+              xmlns:rg="http://rotorgames.com"
+              x:Class="InterTwitter.Views.AlertView">
 
     <Frame x:Name="frame" 
            HorizontalOptions="Center" 

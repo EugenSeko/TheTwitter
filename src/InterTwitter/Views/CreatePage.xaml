@@ -71,6 +71,7 @@
                                       Text="{Binding Name}"
                                       ClearImageSource="{DynamicResource ic_clear_gray}"
                                       FontFamily="Ubuntu-Regular"
+                                      IsButtonClearEnable="True"
                                       PlaceholderColor="{DynamicResource appcolor_i4}"
                                       TextColor="{DynamicResource appcolor_i3}"
                                       IsFocusedVisible="{Binding IsVisibleName}"
@@ -101,6 +102,7 @@
                                       Placeholder="{xct:Translate Email}"
                                       ClearImageSource="{DynamicResource ic_clear_gray}"
                                       FontFamily="Ubuntu-Regular"
+                                      IsButtonClearEnable="True"
                                       PlaceholderColor="{DynamicResource appcolor_i4}"
                                       TextColor="{DynamicResource appcolor_i3}" />
                 

@@ -1,5 +1,5 @@
+using InterTwitter.Helpers;
 using Xamarin.Forms;
-﻿using InterTwitter.Helpers;
 using Xamarin.Forms.PlatformConfiguration;
 using Xamarin.Forms.PlatformConfiguration.iOSSpecific;
 

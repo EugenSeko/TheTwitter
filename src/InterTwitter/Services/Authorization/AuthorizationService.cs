@@ -1,10 +1,7 @@
 ﻿using InterTwitter.Helpers.ProcessHelpers;
 using InterTwitter.Models;
-using InterTwitter.Services.Settings;
 using System;
-using System.Linq;
 using System.Threading.Tasks;
-using Xamarin.Essentials;
 
 namespace InterTwitter.Services
 {
@@ -21,16 +18,6 @@ namespace InterTwitter.Services
             _settingsManager = settingsManager;
         }
 
-        #region -- Public properties --
-
-        public int UserId
-        {
-            get => _settingsManager.UserId;
-            set => _settingsManager.UserId = value;
-        }
-
-        #endregion
-
         #region -- Public helpers --
 
         public async Task<AOResult<UserModel>> CheckUserAsync(string email, string password)
@@ -39,7 +26,7 @@ namespace InterTwitter.Services
 
             try
             {
-                var user = _mockService.Users?.FirstOrDefault(x => x.Email.ToLower() == email.ToLower() && x.Password == password);
+                var user = await _mockService.FindAsync<UserModel>(x => x.Email.ToLower() == email.ToLower() && x.Password == password);
                 if (user != null)
                 {
                     result.SetSuccess(user);

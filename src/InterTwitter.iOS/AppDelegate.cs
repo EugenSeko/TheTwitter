@@ -27,13 +27,5 @@ namespace InterTwitter.iOS
         }
 
         #endregion
-
-        public class iOSInitializer : IPlatformInitializer
-        {
-            public void RegisterTypes(IContainerRegistry containerRegistry)
-            {
-                containerRegistry.RegisterSingleton<IKeyboardHelper, KeyboardHelper>();
-            }
-        }
     }
 }

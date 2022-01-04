@@ -25,11 +25,11 @@ namespace InterTwitter.Services
 
             try
             {
-                var bookmarks = _mockService.Bookmarks.Where(x => x.UserId == userId).ToList();
+                var bookmarks = await _mockService.GetAsync<Bookmark>(x => x.UserId == userId);
 
                 if (bookmarks != null)
                 {
-                    result.SetSuccess(bookmarks);
+                    result.SetSuccess(bookmarks.ToList());
                 }
                 else
                 {
@@ -50,11 +50,11 @@ namespace InterTwitter.Services
 
             try
             {
-                var bookmarks = _mockService.Bookmarks.Where(x => x.UserId != userId && x.Notification).ToList();
+                var bookmarks = await _mockService.GetAsync<Bookmark>(x => x.UserId != userId && x.Notification);
 
                 if (bookmarks != null)
                 {
-                    result.SetSuccess(bookmarks);
+                    result.SetSuccess(bookmarks.ToList());
                 }
                 else
                 {
@@ -74,15 +74,11 @@ namespace InterTwitter.Services
             var result = new AOResult();
             try
             {
-                var bookmark = _mockService.Bookmarks.FirstOrDefault(x => x.UserId == userId);
+                var bookmark = await _mockService.FindAsync<Bookmark>(x => x.UserId == userId);
 
                 if (bookmark != null)
                 {
-                    var bookmarksList = _mockService.Bookmarks.ToList();
-
-                    bookmarksList.RemoveAll(x => x.UserId == userId);
-
-                    _mockService.Bookmarks = bookmarksList;
+                    await _mockService.RemoveAllAsync<Bookmark>(x => x.UserId == userId);
 
                     result.SetSuccess();
                 }
@@ -104,12 +100,12 @@ namespace InterTwitter.Services
             var result = new AOResult();
             try
             {
-                var bookmark = _mockService.Bookmarks.FirstOrDefault(x => x.UserId == userId && x.TweetId == tweetId);
+                var bookmark = await _mockService.FindAsync<Bookmark>(x => x.UserId == userId && x.TweetId == tweetId);
 
                 if (bookmark != null)
                 {
                     result.SetSuccess();
-                    _mockService.Bookmarks.Remove(bookmark);
+                    await _mockService.RemoveAsync<Bookmark>(bookmark);
                 }
                 else
                 {
@@ -129,20 +125,22 @@ namespace InterTwitter.Services
             var result = new AOResult<int>();
             try
             {
-                if (!_mockService.Bookmarks.Any(x => x.TweetId == tweetId && x.UserId == userId))
+                if (!await _mockService.AnyAsync<Bookmark>(x => x.TweetId == tweetId && x.UserId == userId))
                 {
                     var bookmark = new Bookmark
                     {
-                        Id = _mockService.Bookmarks.Count() + 1,
                         TweetId = tweetId,
                         UserId = userId,
                         Notification = true,
                     };
-                    _mockService.Bookmarks.Add(bookmark);
-                    int id = _mockService.Bookmarks.Last().Id;
+                    var id = await _mockService.AddAsync<Bookmark>(bookmark);
                     if (id > 0)
                     {
                         result.SetSuccess(id);
+                    }
+                    else
+                    {
+                        result.SetFailure();
                     }
                 }
                 else
@@ -152,7 +150,7 @@ namespace InterTwitter.Services
             }
             catch (Exception ex)
             {
-                result.SetError($"Exception: {nameof(AddBookmarkAsync)}", Strings.WrongResult, ex);
+                result.SetError($"{nameof(AddBookmarkAsync)}: exception", Strings.WrongResult, ex);
             }
 
             return result;
@@ -163,7 +161,7 @@ namespace InterTwitter.Services
             var result = new AOResult();
             try
             {
-                var any = _mockService.Bookmarks.Any(x => x.TweetId == tweetId && x.UserId == userId);
+                var any = await _mockService.AnyAsync<Bookmark>(x => x.TweetId == tweetId && x.UserId == userId);
                 if (any)
                 {
                     result.SetSuccess();

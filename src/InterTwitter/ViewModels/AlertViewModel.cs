@@ -1,4 +1,5 @@
-﻿using Prism.Commands;
+﻿using InterTwitter.Resources.Strings;
+using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Services.Dialogs;
 using System;
@@ -65,6 +66,8 @@ namespace InterTwitter.ViewModels
             if (parameters.ContainsKey(Constants.DialogParameterKeys.MESSAGE))
             {
                 Message = parameters.GetValue<string>(Constants.DialogParameterKeys.MESSAGE);
+                Title = Strings.Alert;
+                OkButtonText = Strings.Ok;
             }
 
             if (parameters.ContainsKey(Constants.DialogParameterKeys.TITLE))

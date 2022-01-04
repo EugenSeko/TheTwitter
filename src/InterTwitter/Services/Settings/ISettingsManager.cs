@@ -1,4 +1,4 @@
-namespace InterTwitter.Services.Settings
+namespace InterTwitter.Services
 {
     public interface ISettingsManager
     {

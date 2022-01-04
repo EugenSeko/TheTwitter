@@ -1,0 +1,329 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<view:BaseContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                      xmlns:sh="http://sharpnado.com"
+                      xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+                      xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+                      xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+                      xmlns:controls="clr-namespace:InterTwitter.Controls"
+                      xmlns:sc="clr-namespace:InterTwitter.Controls.StateContainer"
+                      xmlns:models="clr-namespace:InterTwitter.Models"
+                      xmlns:viewModels="clr-namespace:InterTwitter.ViewModels"
+                      xmlns:view="clr-namespace:InterTwitter.Views"
+                      x:Class="InterTwitter.Views.CreateTweetPage"
+                      x:DataType="viewModels:CreateTweetPageViewModel">
+
+    <view:BaseContentPage.Content>
+
+        <controls:CustomGrid RowSpacing="0"
+                             BackgroundColor="{DynamicResource appcolor_i2}">
+
+            <controls:CustomGrid.RowDefinitions>
+                
+                <RowDefinition Height="54.67" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="auto" />
+                
+            </controls:CustomGrid.RowDefinitions>
+
+            <StackLayout Grid.Row="0"
+                         Grid.Column="0"
+                         Style="{DynamicResource stackLayout_i1}">
+
+                <ImageButton Source="{DynamicResource ic_cancel_gray}"
+                             Command="{Binding GoBackCommand}"
+                             Style="{DynamicResource imageButton_i1}"/>
+
+                <sc:StateContainer State="{Binding IsButtonPostEnabled}"
+                                   HorizontalOptions="EndAndExpand">
+
+                    <sc:StateCondition State="True">
+
+                        <Button Style="{DynamicResource button_i1}"
+                                BackgroundColor="{DynamicResource appcolor_i1}"
+                                Text="{xct:Translate Post}"
+                                Command="{Binding PostTweetCommand}"/>
+
+                    </sc:StateCondition>
+
+                    <sc:StateCondition State="False">
+
+                        <Button Style="{DynamicResource button_i1}"
+                                BackgroundColor="{DynamicResource appcolor_i4}"
+                                Text="{xct:Translate Post}"/>
+
+                    </sc:StateCondition>
+
+                </sc:StateContainer>
+
+            </StackLayout>
+            
+            <Grid Grid.Row="1"
+                  Grid.Column="0"
+                  Style="{DynamicResource grid_i1}">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="42" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <StackLayout Grid.Row="0"
+                             Grid.Column="0"
+                             Style="{DynamicResource stackLayout_i3}">
+
+                    <Frame Style="{DynamicResource frame_i1}">
+
+                        <ffimageloading:CachedImage Source="{Binding AvatarPath}"
+                                                    Aspect="AspectFit">
+
+                            <ffimageloading:CachedImage.Transformations>
+                                <fftransformations:CircleTransformation/>
+                            </ffimageloading:CachedImage.Transformations>
+                            
+                        </ffimageloading:CachedImage>
+
+                    </Frame>
+
+                </StackLayout>
+
+                <controls:CustomScrollView Grid.Row="0"
+                                           Grid.Column="1"
+                                           Style="{DynamicResource customScrollView_i1}">
+
+                    <StackLayout BackgroundColor="{DynamicResource appcolor_i2}">
+
+                        <controls:CustomEditor Text="{Binding Text}"
+                                               Placeholder="{xct:Translate PlaceholderEditor}"
+                                               CorrectLength="250"
+                                               MaxLength="300"
+                                               Style="{DynamicResource customEditor_i1}"/>
+
+                        <sc:StateContainer State="{Binding AttachedMediaType}"
+                                                       Style="{DynamicResource stateContainer_i1}">
+
+                            <sc:StateCondition State="Photos">
+
+                                <FlexLayout Style="{DynamicResource flexLayout_i1}"
+                                            BindableLayout.ItemsSource="{Binding AttachedMediaFiles}">
+
+                                    <BindableLayout.ItemTemplate>
+
+                                        <DataTemplate x:DataType="models:MiniCardModel">
+
+                                            <Grid Style="{DynamicResource grid_i2}">
+
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="45"/>
+                                                    <RowDefinition Height="21"/>
+                                                </Grid.RowDefinitions>
+
+                                                <Grid.GestureRecognizers>
+                                                    
+                                                    <TapGestureRecognizer Command="{Binding ActionCommand}"
+                                                                          CommandParameter="{Binding .}"/>
+                                                    
+                                                </Grid.GestureRecognizers>
+
+                                                <Frame Grid.Row="0"
+                                                       Style="{DynamicResource frame_i2}">
+                                                    
+                                                    <ffimageloading:CachedImage Source="{Binding FilePath}"
+                                                                                Aspect="AspectFill"/>
+                                                    
+                                                </Frame>
+
+                                                <Frame Grid.Row="1"
+                                                       Style="{DynamicResource frame_i3}">
+
+                                                    <ImageButton Source="{DynamicResource ic_clear_filled_blue}"
+                                                                 Command="{Binding ActionCommand}"
+                                                                 CommandParameter="{Binding .}"
+                                                                 BackgroundColor="Transparent"/>
+
+                                                </Frame>
+
+                                            </Grid>
+
+                                        </DataTemplate>
+
+                                    </BindableLayout.ItemTemplate>
+
+                                </FlexLayout>
+
+                            </sc:StateCondition>
+
+                            <sc:StateCondition State="Gif">
+
+                                <FlexLayout Style="{DynamicResource flexLayout_i1}"
+                                            BindableLayout.ItemsSource="{Binding AttachedMediaFiles}">
+
+                                    <BindableLayout.ItemTemplate>
+
+                                        <DataTemplate x:DataType="models:MiniCardModel">
+
+                                            <Grid Style="{DynamicResource grid_i2}">
+
+                                                <Grid.RowDefinitions>
+                                                    
+                                                    <RowDefinition Height="45"/>
+                                                    <RowDefinition Height="21"/>
+                                                    
+                                                </Grid.RowDefinitions>
+
+                                                <Grid.GestureRecognizers>
+
+                                                    <TapGestureRecognizer Command="{Binding ActionCommand}"
+                                                                          CommandParameter="{Binding .}"/>
+
+                                                </Grid.GestureRecognizers>
+                                                
+                                                <Frame Grid.Row="0"
+                                                       Style="{DynamicResource frame_i2}">
+                                                    
+                                                    <ffimageloading:CachedImage Source="{Binding FilePath}"
+                                                                                Aspect="AspectFill"/>
+
+                                                </Frame>
+
+                                                <Frame Grid.Row="1"
+                                                       Style="{DynamicResource frame_i3}">
+
+                                                    <ImageButton Source="{DynamicResource ic_clear_filled_blue}"
+                                                                 Command="{Binding ActionCommand}"
+                                                                 CommandParameter="{Binding .}"
+                                                                 BackgroundColor="Transparent"/>
+
+                                                </Frame>
+
+                                            </Grid>
+
+                                        </DataTemplate>
+
+                                    </BindableLayout.ItemTemplate>
+
+                                </FlexLayout>
+                                
+                            </sc:StateCondition>
+
+                            <sc:StateCondition State="Video">
+
+                                <StackLayout Orientation="Horizontal">
+
+                                    <Image Source="{DynamicResource ic_video_blue}"
+                                           Style="{DynamicResource image_i1}"/>
+
+                                    <Label Text="{xct:Translate Video}"
+                                           Style="{DynamicResource label_i1}"/>
+
+                                    <ImageButton Source="{DynamicResource ic_clear_filled_blue}"
+                                                 Command="{Binding DeleteAttachedVideoCommand}"
+                                                 CommandParameter="{Binding .}"
+                                                 HeightRequest="21"
+                                                 WidthRequest="21"/>
+
+                                </StackLayout>
+                                
+                            </sc:StateCondition>
+
+                        </sc:StateContainer>
+
+                        <ActivityIndicator IsRunning="{Binding IsActivityIndicatorRunning}"
+                                           IsVisible="{Binding IsActivityIndicatorRunning}"
+                                           Margin="-42, 60, 0, 0"/>
+                        
+                    </StackLayout>
+
+                </controls:CustomScrollView>
+
+            </Grid>
+
+            <sh:Shadows Grid.Row="2"
+                        Grid.Column="0"
+                        Style="{DynamicResource shadows_i1}">
+
+                <StackLayout Style="{DynamicResource stackLayout_i2}">
+
+                    <BoxView Style="{DynamicResource boxView_i1}"/>
+
+                    <StackLayout Style="{DynamicResource stackLayout_i1}">
+
+                        <sc:StateContainer State="{Binding IsButtonUploadPhotosEnabled}">
+                            
+                            <sc:StateCondition State="True">
+
+                                <ImageButton Source="{DynamicResource ic_media_blue}"
+                                             Command="{Binding AddPhotoCommand}"
+                                             Style="{DynamicResource imageButton_i3}"/>
+
+                            </sc:StateCondition>
+                            
+                            <sc:StateCondition State="False">
+
+                                <ImageButton Source="{DynamicResource ic_media_gray}"
+                                             Style="{DynamicResource imageButton_i3}"/>
+
+                            </sc:StateCondition>
+                            
+                        </sc:StateContainer>
+
+                        <sc:StateContainer State="{Binding IsButtonUploadGifEnabled}">
+                            
+                            <sc:StateCondition State="True">
+
+                                <ImageButton Source="{DynamicResource ic_gif_blue}"
+                                             Command="{Binding AddGifCommand}"
+                                             Style="{DynamicResource imageButton_i3}"/>
+
+                            </sc:StateCondition>
+                            
+                            <sc:StateCondition State="False">
+
+                                <ImageButton Source="{DynamicResource ic_gif_gray}"
+                                             Style="{DynamicResource imageButton_i3}"/>
+
+                            </sc:StateCondition>
+                            
+                        </sc:StateContainer>
+
+                        <sc:StateContainer State="{Binding IsButtonUploadVideoEnabled}">
+
+                            <sc:StateCondition State="True">
+
+                                <ImageButton Source="{DynamicResource ic_video_square_blue}"
+                                             Command="{Binding AddVideoCommand}"
+                                             Style="{DynamicResource imageButton_i3}"/>
+
+                            </sc:StateCondition>
+
+                            <sc:StateCondition State="False">
+
+                                <ImageButton Source="{DynamicResource ic_video_square_gray}"
+                                             Style="{DynamicResource imageButton_i3}"/>
+
+                            </sc:StateCondition>
+
+                        </sc:StateContainer>
+
+                        <controls:CircleProgressBar Text="{Binding CircleProgressBarText}"
+                                                    TextColor="{Binding CircleProgressBarTextColor}"
+                                                    FontScale="{Binding CircleProgressBarFontScale}"
+                                                    ProgressLineColor="{Binding CircleProgressBarProgressLineColor}"
+                                                    FontAttributes="{Binding CircleProgressBarFontAttributes}"
+                                                    Value="{Binding CircleProgressBarValue}"
+                                                    HeightRequest="24"
+                                                    WidthRequest="24"
+                                                    Minimum="0"
+                                                    Maximum="250"
+                                                    Style="{DynamicResource circleProgressBar_i1}"/>
+
+                    </StackLayout>
+
+                </StackLayout>
+
+            </sh:Shadows>
+
+        </controls:CustomGrid>
+
+    </view:BaseContentPage.Content>
+    
+</view:BaseContentPage>

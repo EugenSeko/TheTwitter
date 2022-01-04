@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace InterTwitter.Services.UserService
+namespace InterTwitter.Services
 {
     public interface IUserService
     {
@@ -13,7 +13,7 @@ namespace InterTwitter.Services.UserService
 
         Task<AOResult<IEnumerable<UserModel>>> GetAllUsersAsync();
 
-        Task<AOResult> InsertUserAsync(UserModel user);
+        Task<AOResult<int>> InsertUserAsync(UserModel user);
 
         Task<AOResult> DeleteUserAsync(UserModel user);
 

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace InterTwitter.Services.Hashtag
+namespace InterTwitter.Services
 {
     public class HashtagService : IHashtagService
     {
@@ -18,29 +18,28 @@ namespace InterTwitter.Services.Hashtag
 
         #region -- IHashtagManager implementation --
 
-        public async Task<AOResult> IncreaseHashtagPopularityByOne(HashtagModel hashtag)
+        public async Task<AOResult<int>> IncreaseHashtagPopularityByOne(HashtagModel hashtag)
         {
-            var result = new AOResult();
+            var result = new AOResult<int>();
 
             try
             {
-                var allHashtags = new List<HashtagModel>(_mockService.Hashtags);
-
-                if (allHashtags != null)
+                if (!await _mockService.AnyAsync<HashtagModel>(x => x.Text.ToLower() == hashtag.Text.ToLower()))
                 {
-                    int indexOfHashtag = allHashtags.FindIndex(x => x.Text.Equals(hashtag.Text, StringComparison.OrdinalIgnoreCase));
+                    var id = await _mockService.AddAsync<HashtagModel>(hashtag);
 
-                    if (indexOfHashtag > 0)
+                    if (id > 0)
                     {
-                        allHashtags[indexOfHashtag].TweetsCount++;
+                        result.SetSuccess(id);
                     }
                     else
                     {
-                        hashtag.TweetsCount = 1;
-                        allHashtags.Add(hashtag);
+                        result.SetFailure();
                     }
-
-                    _mockService.Hashtags = allHashtags;
+                }
+                else
+                {
+                    result.SetFailure();
                 }
             }
             catch (Exception ex)
@@ -57,25 +56,20 @@ namespace InterTwitter.Services.Hashtag
 
             try
             {
-                var allHashtags = new List<HashtagModel>(_mockService.Hashtags);
-
-                if (allHashtags != null)
+                if (await _mockService.AnyAsync<HashtagModel>(x => x.Text.ToLower() == hashtag.Text.ToLower()))
                 {
-                    int indexOfHashtag = allHashtags.FindIndex(x => x.Text.Equals(hashtag.Text, StringComparison.OrdinalIgnoreCase));
-
-                    if (indexOfHashtag > 0)
+                    if (await _mockService.RemoveAsync<HashtagModel>(hashtag))
                     {
-                        if (allHashtags[indexOfHashtag].TweetsCount > 0)
-                        {
-                            allHashtags[indexOfHashtag].TweetsCount--;
-                        }
-                        else
-                        {
-                            allHashtags.RemoveAt(indexOfHashtag);
-                        }
+                        result.SetSuccess();
                     }
-
-                    _mockService.Hashtags = allHashtags;
+                    else
+                    {
+                        result.SetFailure();
+                    }
+                }
+                else
+                {
+                    result.SetFailure();
                 }
             }
             catch (Exception ex)
@@ -92,7 +86,7 @@ namespace InterTwitter.Services.Hashtag
 
             try
             {
-                var allHashtags = _mockService.Hashtags;
+                var allHashtags = await _mockService.GetAllAsync<HashtagModel>();
 
                 var popularHashtags = allHashtags
                     ?.OrderByDescending(x => x.TweetsCount)

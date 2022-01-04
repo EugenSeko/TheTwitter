@@ -161,14 +161,12 @@ namespace InterTwitter.ViewModels
 
             if (args.PropertyName == nameof(IsFocusedName))
             {
-                if (!string.IsNullOrEmpty(Name))
-                {
-                    ButtonText = Strings.SignUp;
-                }
-                else
-                {
-                    ButtonText = Strings.Next;
-                }
+                ButtonText = Strings.Next;
+            }
+
+            if (args.PropertyName == nameof(IsFocusedEmail))
+            {
+                ButtonText = Strings.SignUp;
             }
 
             if (args.PropertyName == nameof(CurrentHeight))
@@ -250,7 +248,7 @@ namespace InterTwitter.ViewModels
                 _keyboardHelper.HideKeyboard();
 
                 var parametrs = new DialogParameters { { Constants.Navigation.MESSAGE, Strings.AlertLoginTaken } };
-                await _dialogService.ShowDialogAsync(nameof(AlertView), parametrs);
+                await Rg.Plugins.Popup.Services.PopupNavigation.Instance.PushAsync(new AlertView(parametrs, CloseDialogCallback));
             }
             else
             {
@@ -274,23 +272,29 @@ namespace InterTwitter.ViewModels
                             IsWrongName = true;
                         }
 
-                        if (error.PropertyName == nameof(Email))
+                        if (error.PropertyName == nameof(Email) && ButtonText != Strings.Next)
                         {
                             IsWrongEmail = true;
                         }
                     }
 
-                    if (_isSaveFocusedName)
+                    if (!IsWrongName)
                     {
-                        IsEntryNameFocused = true;
-                    }
-
-                    if (_isSaveFocusedEmail)
-                    {
+                        ButtonText = Strings.SignUp;
                         IsEntryEmailFocused = true;
+                    }
+                    else
+                    {
+                        ButtonText = Strings.Next;
+                        IsEntryNameFocused = true;
                     }
                 }
             }
+        }
+
+        private async void CloseDialogCallback(IDialogParameters dialogResult)
+        {
+            await Rg.Plugins.Popup.Services.PopupNavigation.Instance.PopAsync();
         }
 
         #endregion

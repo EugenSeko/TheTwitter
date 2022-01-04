@@ -17,7 +17,7 @@
             <Style x:Key="entry_style" 
                    TargetType="StackLayout">
                 <Setter Property="Margin" 
-                        Value="21,0,21,0" />
+                        Value="21,12,21,0" />
                 <Setter Property="VerticalOptions" 
                         Value="Center" />
             </Style>
@@ -31,6 +31,8 @@
         </ResourceDictionary>
     </local:BaseContentPage.Resources>
 
+    <local:BaseContentPage.Content>
+        <ScrollView>
     <Grid RowDefinitions="0.087*, 0.190*, 0.069*, 0.149*, 0.149*, 0.149*, 0.149*, 0.06*" 
           RowSpacing="0">
 
@@ -65,8 +67,9 @@
         <!--NAVBAR-->
 
         <!--PHOTO SPACE-->
-        <Image Grid.Row="1"
-               Aspect="AspectFill"
+        <Image Grid.Row="1" 
+               x:Name="backgroundImage"
+               Aspect="AspectFill" 
                Source="{Binding UserBackgroundImage}" />
 
         <cardsControls:CircleFrame Grid.Row="1" 
@@ -84,7 +87,7 @@
 
         <cardsControls:CircleFrame Grid.Row="1"
                                    Grid.RowSpan="3"
-                                   Margin="16,0,0,0"
+                                   Margin="16,-18,0,0"
                                    BackgroundColor="{DynamicResource appcolor_i2}"
                                    HeightRequest="69"
                                    HorizontalOptions="Start"
@@ -105,7 +108,7 @@
         </cardsControls:CircleFrame>
         <cardsControls:CircleFrame Grid.Row="1" 
                                    Grid.RowSpan="3"
-                                   Margin="18,0,0,0"
+                                   Margin="18,-18,0,0"
                                    BackgroundColor="#9902060E" 
                                    HorizontalOptions="Start" 
                                    VerticalOptions="Center"
@@ -172,5 +175,6 @@
 
         <Label Grid.Row="7" />
     </Grid>
-
+        </ScrollView>
+    </local:BaseContentPage.Content>
 </local:BaseContentPage>
